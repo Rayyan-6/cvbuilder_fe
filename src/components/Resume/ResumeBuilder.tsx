@@ -1,9 +1,12 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
-import axios from '../../api/axios'; // Make sure this path is correct
+import axios from '../../api/axios'; 
 import ExperienceSection from './ExperienceSection';
 import '../../css files/resume.css';
+import IntroRow from './IntroRow';
+
+import PersonalDetails from './personalDetails';
 
 interface Project {
   heading: string;
@@ -175,17 +178,10 @@ function ResumeBuilder() {
   return (
     <div className="wrapperStyle">
       <div className="pageStyle">
-        {/* Personal Info - will connect later */}
-        <h1 contentEditable style={{ fontSize: '36px', margin: '0 0 8px' }}>
-          Your Name
-        </h1>
-        <p contentEditable style={{ color: '#666', marginBottom: '32px' }}>
-          Job Title • City • email@example.com • phone
-        </p>
+        <IntroRow />
+        <PersonalDetails />
 
-        <hr style={{ margin: '32px 0', border: '1px solid #000' }} />
 
-        {/* Experience Section - Fully Connected */}
         <ExperienceSection
           experiences={experiences}
           onAddExperience={addExperience}

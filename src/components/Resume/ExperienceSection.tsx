@@ -43,8 +43,8 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   onDeleteProject,
 }) => {
   return (
-    <div className='experience-section-wrapper'>
-    <section className='experience-section'>
+    <div className='experience-section-wrapper w-[60%] pl-10 pt-5'>
+    <section className='experience-section '>
         
       <div className="experience-header">
   <h2 className="experience-title">Experience</h2>
