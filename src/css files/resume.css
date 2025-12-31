@@ -1,0 +1,198 @@
+.wrapperStyle {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  background-color: #eaeaea;
+}
+
+.pageStyle{
+    width: 794px;
+    min-height: 1123px;
+    background-color: #edf2f5;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15); 
+    line-height: 1.5;
+}
+
+.add-button {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  padding: 0;
+  margin: 0;
+
+  line-height: 1;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.experience-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.experience-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+ 
+.experience-section{
+    width: 100%;
+}
+
+.companyStyle{
+     font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  padding: 4px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  background: transparent;
+  margin-bottom: 4px;
+}
+
+
+.jobTitleStyle {
+  font-size: 14px;
+  color: #444;
+  font-style: italic;
+  width: 100%;
+  padding: 4px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+
+
+.dateStyle {
+  width: 130px;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-family: inherit;
+
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+
+  background: transparent;
+  color: #333;
+  outline: none;
+
+  transition: border-color 0.2s ease;
+}
+
+.dateStyle:focus {
+  border-bottom-color: #000;
+}
+
+.descriptionStyle {
+  width: 100%;
+  padding: 10px;
+  font-size: 11px;
+  line-height: 1;
+  border: 1px solid #d1cdcd;
+  border-radius: 6px;
+  outline: none;
+  background-color: #ffffff;
+  resize: none;
+  height: 45px;
+
+  
+  font-family: inherit;
+}
+
+.projectTitleInputStyle {
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
+  padding: 4px 0;
+  border: none;
+  border-bottom: 1px dashed #aaa;
+  outline: none;
+  background: transparent;
+  margin-bottom: 4px;
+}
+
+.projectDescriptionStyle {
+  width: 100%;
+  padding: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  outline: none;
+  background-color: #fcfcfc;
+  resize: none;
+  height: 55px;
+}
+
+.smallAddBtnStyle {
+  font-size: 13px;
+  color: #1976d2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  /* margin-top: 2px; */
+  font-weight: 500;
+}
+
+.deleteBtnStyle {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #bbb;
+  padding: 0 6px;
+}
+
+/* Hide editor-only controls by default (print view) */
+.experience-entry .add-button,
+.experience-entry .smallAddBtnStyle,
+.experience-entry .deleteBtnStyle,
+.experience-entry label,
+.experience-entry input[type="checkbox"],
+.experience-entry div[style*="text-align: right"] {
+  opacity: 0;
+  pointer-events: none;
+}
+/* Show controls only when hovering the experience block */
+.experience-entry:hover .add-button,
+.experience-entry:hover .smallAddBtnStyle,
+.experience-entry:hover .deleteBtnStyle,
+.experience-entry:hover label,
+.experience-entry:hover input[type="checkbox"],
+.experience-entry:hover div[style*="text-align: right"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.experience-section-wrapper .add-button {
+  opacity: 0;
+  pointer-events: none;
+}
+.experience-section-wrapper:hover .add-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+.add-button {
+  transition: opacity 0.2s ease;
+}
