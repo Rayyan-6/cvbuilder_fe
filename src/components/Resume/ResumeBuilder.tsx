@@ -9,6 +9,7 @@ import IntroRow from './IntroRow';
 import PersonalDetails from './personalDetails';
 import Languages from '../Languages Section/Languages';
 import Travel from '../Travel Section/Travel';
+import References from '../References Section/References';
 
 interface Project {
   heading: string;
@@ -186,6 +187,7 @@ function ResumeBuilder() {
             <Languages />
         </div>
        <Travel />
+       <References />
 
 
         {/* <ExperienceSection

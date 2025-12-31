@@ -1,6 +1,7 @@
 type SubSection={
     heading: string,
-    description: string
+    description?: string,
+    designation?: string
 }
 
 type GeneralComponentProps={
@@ -18,6 +19,7 @@ function GeneralComponent(props: GeneralComponentProps){
 
                 key={idx}
                 heading={section.heading}
+                designation={section.designation}
                 description={section.description}
                 
                 />
@@ -33,8 +35,9 @@ function GeneralComponent(props: GeneralComponentProps){
 
 function InsideComponent(props: SubSection){
     return <div className="pb-3">
-    <div className="font-bold">{props.heading}</div>
-    <div>{props.description}</div>
+    <div className="font-bold text-xs">{props.heading}</div>
+    <div className="text-xs">{props.designation}</div>
+    <div className="text-xs">{props.description}</div>
     </div>
 
 }
