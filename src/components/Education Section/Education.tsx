@@ -1,7 +1,7 @@
 import EducationComponent from "./EducationComponent"
 
 function Education(){
-    return <div className="mr-10 pt-5">
+    return <div className="mr-10">
         <EducationComponent title="Education"
             subSections={
                 [

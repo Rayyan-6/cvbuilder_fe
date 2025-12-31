@@ -1,7 +1,7 @@
 import GeneralComponent from "../Resume Component/GeneralComponent"
 
 function Interests(){
-    return <div className="mr-5 pt-5">
+    return <div className="mr-5 ">
 
         <GeneralComponent 
             title="Interests"

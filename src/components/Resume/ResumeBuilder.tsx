@@ -15,6 +15,7 @@ import ComputerSkills from '../Computer Skills Section/ComputerSection';
 import Skills from '../Skills Section/Skills';
 import SocialNetworks from '../Social Networks/SocialNetworks';
 import Education from '../Education Section/Education';
+import WorkExperience from '../Work Experience/WorkExperience';
 
 interface Project {
   heading: string;
@@ -200,6 +201,7 @@ function ResumeBuilder() {
           
             
        <Education />
+        <WorkExperience />
         <Skills />
         <ComputerSkills />
 
@@ -212,6 +214,7 @@ function ResumeBuilder() {
               <References />
         <Interests />
         <SocialNetworks />
+       
           </div>
 
 

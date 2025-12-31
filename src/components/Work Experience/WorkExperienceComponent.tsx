@@ -2,20 +2,20 @@ import { useState } from "react"
 import Modal from "../Modals/Modal"
 
 type SubSection = {
-    degree?: string,
+    heading?: string,
     duration?: string,
-    institute?: string,
+    company?: string,
     description?: string[]
 
 }
 
-type EducationComponentProps = {
+type WorkExperienceComponentProps = {
     title: string,
     subSections: SubSection[]
 }
 
 
-function EducationComponent(props: EducationComponentProps) {
+function WorkExperienceComponent(props: WorkExperienceComponentProps) {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -75,9 +75,9 @@ function EducationComponent(props: EducationComponentProps) {
             {props.subSections.map((section, idx) => (
                 <InsideComponent
                     key={idx}
-                    degree={section.degree}
+                    heading={section.heading}
                     duration={section.duration}
-                    institute={section.institute}
+                    company={section.company}
                     description={section.description}
 
                 />
@@ -98,7 +98,7 @@ function InsideComponent(props: SubSection) {
       {/* Content */}
       <div>
         <span className="flex flex-row justify-between">
-          <div className="font-bold text-xs">{props.degree}</div>
+          <div className="font-bold text-xs">{props.heading}</div>
 
           {/* hover container */}
           <span className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
@@ -129,7 +129,7 @@ function InsideComponent(props: SubSection) {
 
         <span className="flex flex-row text-xs text-gray-500 mt-1">
           {props.duration && <div>{props.duration}</div>}
-          {props.institute && <div className="ml-2 text-black">{props.institute}</div>}
+          {props.company && <div className="ml-2 text-black">{props.company}</div>}
         </span>
 
         {props.description && (
@@ -145,4 +145,4 @@ function InsideComponent(props: SubSection) {
 }
 
 
-export default EducationComponent
+export default WorkExperienceComponent

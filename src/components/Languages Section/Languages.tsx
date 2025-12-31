@@ -1,7 +1,7 @@
 import GeneralComponent from "../Resume Component/GeneralComponent"
 
 function Languages(){
-    return  <div className=" pt-5 mr-5">
+    return  <div className=" mr-5">
             <GeneralComponent title="Languages" subSections={
                 [
                    { 
