@@ -9,7 +9,7 @@ type PersonalDetailItemProps={
 
 function PersonalDetailItem(props: PersonalDetailItemProps){
     return <>
-    <div className="flex flex-row  w-[60%] pl-10 pt-1">
+    <div className="flex flex-row  pl-10 pt-1">
        
                 <div className='w-50 m-1'> 📩 {props.value}</div>
 

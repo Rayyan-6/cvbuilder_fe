@@ -7,6 +7,7 @@ import '../../css files/resume.css';
 import IntroRow from './IntroRow';
 
 import PersonalDetails from './personalDetails';
+import Languages from '../Languages Section/Languages';
 
 interface Project {
   heading: string;
@@ -177,12 +178,16 @@ function ResumeBuilder() {
 
   return (
     <div className="wrapperStyle">
-      <div className="pageStyle">
+      <div className="pageStyle ">
         <IntroRow />
-        <PersonalDetails />
+        <div className='flex flex-row '>
+            <PersonalDetails />
+            <Languages />
+        </div>
+       
 
 
-        <ExperienceSection
+        {/* <ExperienceSection
           experiences={experiences}
           onAddExperience={addExperience}
           onUpdateExperience={updateExperience}
@@ -190,7 +195,7 @@ function ResumeBuilder() {
           onAddProject={addProject}
           onUpdateProject={updateProject}
           onDeleteProject={deleteProject}
-        />
+        /> */}
       </div>
     </div>
   );

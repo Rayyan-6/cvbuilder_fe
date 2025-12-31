@@ -34,7 +34,7 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
   onDeleteProject,
 }) => {
   return (
-    <div className="experience-entry">
+    <div className="experience-entry bg-white ml-5 p-2">
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div style={{ flex: 1 }}>
