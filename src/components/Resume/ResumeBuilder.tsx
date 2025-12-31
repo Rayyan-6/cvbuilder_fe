@@ -11,6 +11,7 @@ import Languages from '../Languages Section/Languages';
 import Travel from '../Travel Section/Travel';
 import References from '../References Section/References';
 import Interests from '../Interests Component/Interests';
+import ComputerSkills from '../Computer Skills Section/ComputerSection';
 
 interface Project {
   heading: string;
@@ -190,6 +191,7 @@ function ResumeBuilder() {
        <Travel />
        <References />
        <Interests />
+       <ComputerSkills />
 
 
         {/* <ExperienceSection
