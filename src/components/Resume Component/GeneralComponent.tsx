@@ -12,7 +12,7 @@ type GeneralComponentProps={
 
 function GeneralComponent(props: GeneralComponentProps){
     return <div className=" font-sans">
-        <h2 className="font-bold text-1xl">{props.title}</h2>
+        <h2 className="font-bold text-1xl pb-3">{props.title}</h2>
         <div className="bg-white ml-5 pl-5 pt-5">
             {props.subSections.map( (section,idx) =>(
                 <InsideComponent 
