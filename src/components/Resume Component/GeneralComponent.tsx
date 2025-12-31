@@ -2,9 +2,11 @@ import { useState } from "react"
 import Modal from "../Modals/Modal"
 
 type SubSection = {
-    heading: string,
+    heading?: string,
     description?: string,
     designation?: string
+    icon?: string,
+    iconDesc?: string
 }
 
 type GeneralComponentProps = {
@@ -23,7 +25,7 @@ function GeneralComponent(props: GeneralComponentProps) {
                     <Modal 
                     isOpen={isModalOpen}
                     onClose={()=>setIsModalOpen(false)}/>
-                    
+
         <span className="flex flex-col ">
             <div className="opacity-0 group-hover:opacity-100 ">
                 <div className="bg-black flex flex-row text-white w-25 h-5 justify-center">
@@ -76,7 +78,9 @@ function GeneralComponent(props: GeneralComponentProps) {
                     heading={section.heading}
                     designation={section.designation}
                     description={section.description}
-                />
+                    icon={section.icon}
+                    iconDesc={section.iconDesc}
+                    />
             ))}
         </div>
     </div>
@@ -86,7 +90,7 @@ function GeneralComponent(props: GeneralComponentProps) {
 function InsideComponent(props: SubSection) {
     return <div className="pb-3 ">
         <span className="flex flex-row justify-between ">
-            <div className="font-bold text-xs  ">{props.heading}</div>
+            {!props.icon && (<div className="font-bold text-xs ">{props.heading}</div>)}
 
             {/* hover container */}
             <span className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
@@ -129,6 +133,14 @@ function InsideComponent(props: SubSection) {
                 </button>
             </span>
         </span>
+
+        {props.icon && (
+            <div className="flex flex-row">
+            <div className="">{props.icon}</div>
+            <div className="ml-3">{props.iconDesc}</div>
+</div>
+            )
+            }
 
         {props.designation && (<div className="text-xs ">{props.designation}</div>)}
         {props.description && (<div className="text-xs ">{props.description}</div>)}
