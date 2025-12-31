@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
-import axios from '../../api/axios'; 
+import axios from '../../api/axios';
 import ExperienceSection from './ExperienceSection';
 import '../../css files/resume.css';
 import IntroRow from './IntroRow';
@@ -79,7 +79,7 @@ function ResumeBuilder() {
     updateMutation.mutate({ id, data: updated });
   }, 600);
 
-  
+
   const addExperience = () => {
     const newExp = {
       company: '',
@@ -93,7 +93,7 @@ function ResumeBuilder() {
     createMutation.mutate(newExp);
   };
 
- 
+
   const updateExperience = (id: string, updated: Experience) => {
     queryClient.setQueryData(['experiences'], (old: Experience[] | undefined) =>
       old?.map((exp) => (exp.id === id ? updated : exp))
@@ -115,7 +115,7 @@ function ResumeBuilder() {
       )
     );
 
-    
+
     const updatedExp = experiences.find((e) => e.id === expId);
     if (updatedExp) {
       const newWithProject = {
@@ -136,11 +136,11 @@ function ResumeBuilder() {
       old?.map((exp) =>
         exp.id === expId
           ? {
-              ...exp,
-              projects: exp.projects.map((p, i) =>
-                i === projIndex ? { ...p, [field]: value } : p
-              ),
-            }
+            ...exp,
+            projects: exp.projects.map((p, i) =>
+              i === projIndex ? { ...p, [field]: value } : p
+            ),
+          }
           : exp
       )
     );
@@ -183,17 +183,39 @@ function ResumeBuilder() {
 
   return (
     <div className="wrapperStyle">
-      <div className="pageStyle ">
+      <div className="pageStyle font-sans">
         <IntroRow />
-        <div className='flex flex-row '>
+
+
+
+        {/* main row */}
+        <div className='flex flex-row w-full h-[93%] pl-10'>
+
+          {/* left side column */}
+          <div className='flex flex-col w-[65%] '>
+         
             <PersonalDetails />
-            <Languages />
+          
+            
+       
+        <Skills />
+        <ComputerSkills />
+
+          </div>
+          {/* right side column*/}
+          <div className='flex flex-col w-[35%] '>
+
+ <Languages />
+             <Travel />
+              <References />
+        <Interests />
+          </div>
+
+
+
         </div>
-       <Travel />
-       <References />
-       <Interests />
-       <Skills />
-       <ComputerSkills />
+       
+        
 
 
         {/* <ExperienceSection

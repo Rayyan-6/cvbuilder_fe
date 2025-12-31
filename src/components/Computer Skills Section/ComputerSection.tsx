@@ -1,7 +1,7 @@
 import GeneralComponent from "../Resume Component/GeneralComponent"
 
 function ComputerSkills(){
-    return <div className="pt-5 w-[60%]">
+    return <div className="pt-5 mr-10">
         <GeneralComponent 
         
         title="Computer Skills"

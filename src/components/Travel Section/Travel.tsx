@@ -1,7 +1,7 @@
 import GeneralComponent from "../Resume Component/GeneralComponent"
 
 function Travel(){
-    return  <div className="w-[35%] pt-5">
+    return  <div className="mr-5 pt-5">
         <GeneralComponent title="Travel" 
 
         subSections={[
