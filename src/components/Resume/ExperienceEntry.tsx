@@ -90,7 +90,7 @@ const ExperienceEntry = (props: ExperienceEntryProps) => {
                 endDate: "",
               })
             }
-            className="mr-[4px] items-center font-sane"
+            className="mr-[4px] items-center font-sans"
           />
           Present
         </label>
@@ -106,7 +106,7 @@ const ExperienceEntry = (props: ExperienceEntryProps) => {
         maxLength={100}
         rows={3}
       />
-      <div className="text-[11px] text-[#777] justify-end">
+      <div className="text-[11px] text-[#777] text-right">
         {props.experience.description.length}/100
       </div>
 

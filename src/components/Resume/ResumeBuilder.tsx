@@ -182,7 +182,7 @@ function ResumeBuilder() {
     return (
       <div className="wrapperStyle">
         <div
-          className="pageStyle pt-[100px] items-center"
+          className="pageStyle pt-[100px] text-center"
         >
           <p>Loading your resume...</p>
         </div>
