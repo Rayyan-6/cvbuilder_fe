@@ -3,13 +3,11 @@ type ModalProps = {
   onClose: () => void;
 };
 
+function Modal(props: ModalProps) {
+  if (!props.isOpen) return null;
 
-function Modal(props:ModalProps){
-
-    if(!props.isOpen) return null
-
-    return  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
-      
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
       <div className="bg-white rounded-lg p-6 w-[400px] relative h-[50%] w-90">
         <button
           onClick={props.onClose}
@@ -22,9 +20,7 @@ function Modal(props:ModalProps){
         <p>This is a sample Modal</p>
       </div>
     </div>
-
+  );
 }
 
-
-
-export default Modal
+export default Modal;

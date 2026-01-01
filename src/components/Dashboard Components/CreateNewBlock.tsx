@@ -18,7 +18,8 @@ function CreateNewBlock() {
   };
 
   return (
-    <div className='flex flex-col'
+    <div
+      className="flex flex-col"
       style={blockStyle}
       onClick={() => navigate('/resume-builder')}
       onMouseEnter={(e) => {
@@ -31,7 +32,7 @@ function CreateNewBlock() {
       }}
     >
       <div>+</div>
-      <div className='text-sm'>Click here to start building</div>
+      <div className="text-sm">Click here to start building</div>
     </div>
   );
 }

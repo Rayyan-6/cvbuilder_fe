@@ -1,23 +1,23 @@
-import GeneralComponent from "../Resume Component/GeneralComponent"
+import GeneralComponent from '../Resume Component/GeneralComponent';
 
-function Skills(){
-    return <div className="mr-10">
-        <GeneralComponent 
+function Skills() {
+  return (
+    <div className="mr-10">
+      <GeneralComponent
         title="Skills"
-        subSections={
-            [
-                {
-                    heading: 'Skill one',
-                    description: 'Provide eamples of your experience using this skill'
-                },
-                {
-                    heading: 'Skill two',
-                    description: 'Provide eamples of your experience using this skill'
-                },
-            ]
-        }
-        />
+        subSections={[
+          {
+            heading: 'Skill one',
+            description: 'Provide eamples of your experience using this skill',
+          },
+          {
+            heading: 'Skill two',
+            description: 'Provide eamples of your experience using this skill',
+          },
+        ]}
+      />
     </div>
+  );
 }
 
-export default Skills
+export default Skills;

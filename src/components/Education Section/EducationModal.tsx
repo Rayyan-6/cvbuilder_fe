@@ -3,13 +3,11 @@ type EducationModalProps = {
   onClose: () => void;
 };
 
+function EducationModal(props: EducationModalProps) {
+  if (!props.isOpen) return null;
 
-function EducationModal(props:EducationModalProps){
-
-    if(!props.isOpen) return null
-
-    return  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
-      
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
       <div className="bg-white rounded-lg p-6 w-[400px] relative h-[50%]">
         <button
           onClick={props.onClose}
@@ -22,7 +20,7 @@ function EducationModal(props:EducationModalProps){
         <p>This is the education Modal</p>
       </div>
     </div>
-
+  );
 }
 
-export default EducationModal
+export default EducationModal;
