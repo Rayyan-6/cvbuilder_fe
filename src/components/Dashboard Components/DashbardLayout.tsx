@@ -1,24 +1,15 @@
-// src/components/Dashboard/DashboardLayout.tsx
 import React from 'react';
 
-interface DashboardLayoutProps {
+type DashboardLayoutProps= {
   children: React.ReactNode;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout = (props: DashboardLayoutProps) => {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: '#f7fafc',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '4rem 1rem',
-        gap: '3rem',
-      }}
+    <div className='min-h-screen bg-[#f7fafc] flex flex-col items-center px-4 py-16 gap-12'
+    
     >
-      {children}
+      {props.children}
     </div>
   );
 };

@@ -5,7 +5,12 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input = ({ label, type = 'text', value, onChange }: InputProps) => (
+export const Input = ({
+  label,
+  type = "text",
+  value,
+  onChange,
+}: InputProps) => (
   <div className="mb-4">
     <label className="block mb-1 font-medium text-gray-700">{label}</label>
     <input
