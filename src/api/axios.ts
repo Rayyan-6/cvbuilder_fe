@@ -2,7 +2,11 @@
 import axios from 'axios';
 
 axios.defaults.baseURL =
-  import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  import.meta.env.VITE_API_URL;
+
+  if(!axios.defaults.baseURL){
+    throw new Error("Please set the env variables")
+  }
 
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
