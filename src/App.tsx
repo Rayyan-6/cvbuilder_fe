@@ -1,5 +1,4 @@
-
-import './App.css'
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
@@ -10,25 +9,24 @@ import { AuthContext } from './context/AuthContext';
 import ResumeBuilder from './components/Resume/ResumeBuilder';
 
 function App() {
-    const { token } = useContext(AuthContext);
-
+  const { token } = useContext(AuthContext);
 
   return (
     <>
-       <Router>
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-         <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute isAuthenticated={!!token}>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+      <Router>
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute isAuthenticated={!!token}>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
 
-        <Route
+          <Route
             path="/resume-builder"
             element={
               <PrivateRoute isAuthenticated={!!token}>
@@ -36,12 +34,10 @@ function App() {
               </PrivateRoute>
             }
           />
-
-
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

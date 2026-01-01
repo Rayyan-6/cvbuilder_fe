@@ -7,4 +7,4 @@ const cardStyle: React.CSSProperties = {
   boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
 };
 
-export default cardStyle
+export default cardStyle;
