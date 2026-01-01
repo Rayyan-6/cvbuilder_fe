@@ -3,23 +3,10 @@ import { useNavigate } from 'react-router-dom';
 function CreateNewBlock() {
   const navigate = useNavigate();
 
-  const blockStyle: React.CSSProperties = {
-    width: '280px',
-    height: '160px',
-    borderRadius: '12px',
-    border: '2px dashed #ccc',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    fontSize: '48px',
-    color: '#666',
-    transition: 'all 0.2s ease-in-out',
-  };
-
   return (
-    <div className='flex flex-col'
-      style={blockStyle}
+    <div className='flex flex-col h-[160px]  justify-center items-center cursor-pointer text-[48px] text-[#666] border-2 border-dashed border-gray-300
+'
+      
       onClick={() => navigate('/resume-builder')}
       onMouseEnter={(e) => {
         e.currentTarget.style.borderColor = '#000';

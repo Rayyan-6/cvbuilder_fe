@@ -1,13 +1,13 @@
-import React from 'react';
-import ExperienceEntry from './ExperienceEntry';
-import '../../css files/resume.css'
+import React from "react";
+import ExperienceEntry from "./ExperienceEntry";
+import "../../css files/resume.css";
 
-interface Project {
+type Project = {
   heading: string;
   description: string;
-}
+};
 
-interface Experience {
+type Experience = {
   id: string;
   company: string;
   jobTitle: string;
@@ -16,9 +16,9 @@ interface Experience {
   isCurrent: boolean;
   description: string;
   projects: Project[];
-}
+};
 
-interface ExperienceSectionProps {
+type ExperienceSectionProps = {
   experiences: Experience[];
   onAddExperience: () => void;
   onUpdateExperience: (id: string, updated: Experience) => void;
@@ -27,13 +27,13 @@ interface ExperienceSectionProps {
   onUpdateProject: (
     expId: string,
     projIndex: number,
-    field: 'heading' | 'description',
+    field: "heading" | "description",
     value: string
   ) => void;
   onDeleteProject: (expId: string, projIndex: number) => void;
-}
+};
 
-const ExperienceSection: React.FC<ExperienceSectionProps> = ({
+const ExperienceSection = ({
   experiences,
   onAddExperience,
   onUpdateExperience,
@@ -41,45 +41,37 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   onAddProject,
   onUpdateProject,
   onDeleteProject,
-}) => {
+}: ExperienceSectionProps) => {
   return (
-    <div className='experience-section-wrapper w-[60%] pl-10 pt-5 bg-red-500'>
-    <section className='experience-section bg-amber-300'>
-        
-      <div className="experience-header">
-  <h2 className="experience-title">Experience</h2>
-  <button className="add-button" onClick={onAddExperience}>+</button>
-</div>
+    <div className="experience-section-wrapper w-[60%] pl-10 pt-5 bg-red-500">
+      <section className="experience-section bg-amber-300">
+        <div className="experience-header">
+          <h2 className="experience-title">Experience</h2>
+          <button className="add-button" onClick={onAddExperience}>
+            +
+          </button>
+        </div>
 
-      {experiences.length === 0 ? (
-        <p style={{ color: '#999', fontStyle: 'italic' }}>
-          Click "Add Experience" to get started
-        </p>
-      ) : (
-        experiences.map((exp) => (
-          <ExperienceEntry 
-            key={exp.id}
-            experience={exp}
-            onChange={(updated) =>
-              onUpdateExperience(exp.id, updated)
-            }
-            onDelete={() => onDeleteExperience(exp.id)}
-            onAddProject={() => onAddProject(exp.id)}
-            onUpdateProject={(idx, field, value) =>
-              onUpdateProject(exp.id, idx, field, value)
-            }
-            onDeleteProject={(idx) =>
-              onDeleteProject(exp.id, idx)
-            }
-            
-          />
-        ))
-      )}
-
-      {/* <button className="add-button" onClick={onAddExperience}>
-        Add Experience
-      </button> */}
-    </section>
+        {experiences.length === 0 ? (
+          <p className="text-[#999] italic">
+            Click "Add Experience" to get started
+          </p>
+        ) : (
+          experiences.map((exp) => (
+            <ExperienceEntry
+              key={exp.id}
+              experience={exp}
+              onChange={(updated) => onUpdateExperience(exp.id, updated)}
+              onDelete={() => onDeleteExperience(exp.id)}
+              onAddProject={() => onAddProject(exp.id)}
+              onUpdateProject={(idx, field, value) =>
+                onUpdateProject(exp.id, idx, field, value)
+              }
+              onDeleteProject={(idx) => onDeleteProject(exp.id, idx)}
+            />
+          ))
+        )}
+      </section>
     </div>
   );
 };
