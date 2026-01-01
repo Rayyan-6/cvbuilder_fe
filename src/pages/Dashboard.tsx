@@ -1,10 +1,9 @@
+import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
 
-import { jwtDecode } from 'jwt-decode';
-import { useEffect, useState } from 'react';
-
-import CreateNewBlock from '../components/Dashboard Components/CreateNewBlock';
-import WelcomeCard from '../components/Dashboard Components/WelcomeCard';
-import DashboardLayout from '../components/Dashboard Components/DashbardLayout';
+import CreateNewBlock from "../components/Dashboard Components/CreateNewBlock";
+import WelcomeCard from "../components/Dashboard Components/WelcomeCard";
+import DashboardLayout from "../components/Dashboard Components/DashbardLayout";
 
 type JwtPayload = {
   email: string;
@@ -16,14 +15,14 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (token) {
       try {
         const decoded = jwtDecode<JwtPayload>(token);
         setUser(decoded);
       } catch (error) {
-        console.error('Invalid token');
+        console.error("Invalid token");
       }
     }
     setLoading(false);
@@ -31,15 +30,7 @@ export const Dashboard = () => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#f7fafc',
-        }}
-      >
+      <div className="min-h-screen flex items-center justify-center bg-[#f7fafc]">
         <p>Loading...</p>
       </div>
     );

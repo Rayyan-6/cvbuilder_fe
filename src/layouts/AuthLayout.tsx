@@ -4,18 +4,7 @@ type Props = {
 
 const AuthLayout = ({ children }: Props) => {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundImage: 'url(/cvbg.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
+    <div className="min-h-screen bg-[url('/cvbg.png')] bg-cover bg-center bg-no-repeat flex items-center justify-center">
       {children}
     </div>
   );

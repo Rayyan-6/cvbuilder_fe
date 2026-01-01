@@ -38,7 +38,7 @@ export const Signup = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <span className='auth-button-row'>
+      <span className="flex flex-row justify-between items-center">
       <Button text="Sign Up" onClick={handleSubmit} /> 
       <Link to='/login'>Login instead</Link>
 </span>
