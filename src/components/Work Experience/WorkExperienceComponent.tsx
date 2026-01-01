@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "../Modals/Modal";
-import { PlusIcon, TrashIcon } from "../Icons/Icons";
+import { EditIcon, PlusIcon, TrashIcon } from "../Icons/Icons";
 
 type SubSection = {
   heading?: string;
@@ -76,7 +76,9 @@ function InsideComponent(props: SubSection) {
           {/* hover container */}
           <span className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
             {/* edit */}
-            <button className="cursor-pointer">✎</button>
+            <button className="cursor-pointer">
+              <EditIcon />
+            </button>
 
             {/* delete */}
             <button className="cursor-pointer">
