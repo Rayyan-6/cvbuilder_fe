@@ -4,7 +4,7 @@ function CreateNewBlock() {
   const navigate = useNavigate();
 
   return (
-    <div className='flex flex-col h-[160 px]  justify-center items-center cursor-pointer text-[48px] text-[#666] border-2 border-dashed border-gray-300
+    <div className='flex flex-col h-[160px]  justify-center items-center cursor-pointer text-[48px] text-[#666] border-2 border-dashed border-gray-300
 '
       
       onClick={() => navigate('/resume-builder')}

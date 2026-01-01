@@ -65,7 +65,7 @@ function WorkExperienceComponent(props: WorkExperienceComponentProps) {
             </button>
           </div>
         </div>
-        <h2 className="font-bold text-1xl pb-3">{props.title}</h2>
+        <h2 className="font-bold text-xl pb-3">{props.title}</h2>
       </span>
 
       <div className="bg-white ml-5 pl-5 pt-5">

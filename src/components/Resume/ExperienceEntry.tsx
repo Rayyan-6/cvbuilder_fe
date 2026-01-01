@@ -57,7 +57,7 @@ const ExperienceEntry = (props: ExperienceEntryProps) => {
       </div>
 
       {/* Dates */}
-      <div className="bg-[#555] text-[13px] m-5">
+      <div className="text-[#555] text-[13px] mt-1 mb-2.5">
         <input
           type="month"
           value={props.experience.startDate}
@@ -66,9 +66,9 @@ const ExperienceEntry = (props: ExperienceEntryProps) => {
           }
           className="dateStyle"
         />
-        <span className="m-5">-</span>
+        <span className="mx-2">-</span>
         {props.experience.isCurrent ? (
-          <span className="font-bold text-[#2e7d32] font-sans">Present</span>
+          <span className="font-medium text-[#2e7d32] font-sans">Present</span>
         ) : (
           <input
             type="month"
@@ -90,7 +90,7 @@ const ExperienceEntry = (props: ExperienceEntryProps) => {
                 endDate: "",
               })
             }
-            className="mr-[4px] items-center font-sans"
+            className="mr-1 align-middle font-sans"
           />
           Present
         </label>
