@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Modal from "../Modals/Modal";
-import { EditIcon, PlusIcon, TrashIcon } from "../Icons/Icons";
+import TrashIcon from "../Icons/TrashIcon";
+import PlusIcon from "../Icons/PlusIcon";
+import EditIcon from "../Icons/EditIcon";
 
 type SubSection = {
   heading?: string;

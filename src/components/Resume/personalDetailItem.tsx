@@ -1,4 +1,4 @@
-import { EnvelopeIcon } from "../Icons/Icons";
+import EnvelopeIcon from "../Icons/EnvelopeIcon";
 
 type PersonalDetailItemProps = {
   value: string;
