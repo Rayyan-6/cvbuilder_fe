@@ -57,7 +57,8 @@ function ResumeBuilder() {
 
   // Mutations
   const createMutation = useMutation({
-    mutationFn: (newExp: Partial<Experience>) => axios.post('/cv/experience', newExp),
+    mutationFn: (newExp: Partial<Experience>) =>
+      axios.post('/cv/experience', newExp),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] });
     },
@@ -78,10 +79,12 @@ function ResumeBuilder() {
     },
   });
 
-  const debouncedUpdate = useDebouncedCallback((id: string, updated: Experience) => {
-    updateMutation.mutate({ id, data: updated });
-  }, 600);
-
+  const debouncedUpdate = useDebouncedCallback(
+    (id: string, updated: Experience) => {
+      updateMutation.mutate({ id, data: updated });
+    },
+    600
+  );
 
   const addExperience = () => {
     const newExp = {
@@ -95,7 +98,6 @@ function ResumeBuilder() {
     };
     createMutation.mutate(newExp);
   };
-
 
   const updateExperience = (id: string, updated: Experience) => {
     queryClient.setQueryData(['experiences'], (old: Experience[] | undefined) =>
@@ -113,11 +115,13 @@ function ResumeBuilder() {
     queryClient.setQueryData(['experiences'], (old: Experience[] | undefined) =>
       old?.map((exp) =>
         exp.id === expId
-          ? { ...exp, projects: [...exp.projects, { heading: '', description: '' }] }
+          ? {
+              ...exp,
+              projects: [...exp.projects, { heading: '', description: '' }],
+            }
           : exp
       )
     );
-
 
     const updatedExp = experiences.find((e) => e.id === expId);
     if (updatedExp) {
@@ -139,11 +143,11 @@ function ResumeBuilder() {
       old?.map((exp) =>
         exp.id === expId
           ? {
-            ...exp,
-            projects: exp.projects.map((p, i) =>
-              i === projIndex ? { ...p, [field]: value } : p
-            ),
-          }
+              ...exp,
+              projects: exp.projects.map((p, i) =>
+                i === projIndex ? { ...p, [field]: value } : p
+              ),
+            }
           : exp
       )
     );
@@ -177,7 +181,10 @@ function ResumeBuilder() {
   if (isLoading) {
     return (
       <div className="wrapperStyle">
-        <div className="pageStyle" style={{ textAlign: 'center', paddingTop: '100px' }}>
+        <div
+          className="pageStyle"
+          style={{ textAlign: 'center', paddingTop: '100px' }}
+        >
           <p>Loading your resume...</p>
         </div>
       </div>
@@ -189,40 +196,26 @@ function ResumeBuilder() {
       <div className="pageStyle font-sans">
         <IntroRow />
 
-
-
         {/* main row */}
-        <div className='flex flex-row w-full h-[93%] pl-10'>
-
+        <div className="flex flex-row w-full h-[93%] pl-10">
           {/* left side column */}
-          <div className='flex flex-col w-[65%] '>
-         
+          <div className="flex flex-col w-[65%] ">
             <PersonalDetails />
-          
-            
-       <Education />
-        <WorkExperience />
-        <Skills />
-        <ComputerSkills />
 
+            <Education />
+            <WorkExperience />
+            <Skills />
+            <ComputerSkills />
           </div>
           {/* right side column*/}
-          <div className='flex flex-col w-[35%] '>
-
- <Languages />
-             <Travel />
-              <References />
-        <Interests />
-        <SocialNetworks />
-       
+          <div className="flex flex-col w-[35%] ">
+            <Languages />
+            <Travel />
+            <References />
+            <Interests />
+            <SocialNetworks />
           </div>
-
-
-
         </div>
-       
-        
-
 
         {/* <ExperienceSection
           experiences={experiences}
@@ -239,4 +232,3 @@ function ResumeBuilder() {
 }
 
 export default ResumeBuilder;
-

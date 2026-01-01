@@ -6,6 +6,9 @@ interface PrivateRouteProps {
   isAuthenticated: boolean;
 }
 
-export const PrivateRoute = ({ children, isAuthenticated }: PrivateRouteProps) => {
+export const PrivateRoute = ({
+  children,
+  isAuthenticated,
+}: PrivateRouteProps) => {
   return isAuthenticated ? children : <Navigate to="/login" />;
 };

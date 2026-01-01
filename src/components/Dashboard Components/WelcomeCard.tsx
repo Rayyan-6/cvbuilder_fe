@@ -22,7 +22,13 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ email, name }) => {
         textAlign: 'center' as const,
       }}
     >
-      <h1 style={{ fontSize: '2.5rem', margin: '0 0 0.5rem 0', fontWeight: '700' }}>
+      <h1
+        style={{
+          fontSize: '2.5rem',
+          margin: '0 0 0.5rem 0',
+          fontWeight: '700',
+        }}
+      >
         Welcome back, {displayName}!
       </h1>
       <p style={{ fontSize: '1.2rem', opacity: 0.9, margin: '0' }}>
