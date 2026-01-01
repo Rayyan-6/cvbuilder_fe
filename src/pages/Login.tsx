@@ -4,10 +4,7 @@ import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import "../css files/auth.css";
 
-import AuthLayout from "../layouts/AuthLayout";
-import cardStyle from "./cardStyle";
 
 export const Login = () => {
   const { setToken } = useContext(AuthContext);
@@ -44,7 +41,7 @@ export const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <span className="auth-button-row">
+        <span className="flex flex-row justify-between items-center">
           <Button text="Login" onClick={handleSubmit} />
 
           <Link to="/signup">Signup instead</Link>

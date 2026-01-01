@@ -2,8 +2,6 @@ import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 import axios from "../../api/axios";
-import ExperienceSection from "./ExperienceSection";
-import "../../css files/resume.css";
 import IntroRow from "./IntroRow";
 
 import PersonalDetails from "./personalDetails";
@@ -180,9 +178,9 @@ function ResumeBuilder() {
 
   if (isLoading) {
     return (
-      <div className="wrapperStyle">
+      <div className="min-h-screen flex justify-center py-10 bg-[#eaeaea]">
         <div
-          className="pageStyle pt-[100px] text-center"
+          className="pt-25 text-center"
         >
           <p>Loading your resume...</p>
         </div>
@@ -191,8 +189,8 @@ function ResumeBuilder() {
   }
 
   return (
-    <div className="wrapperStyle">
-      <div className="pageStyle font-sans">
+    <div className="min-h-screen flex justify-center py-10 bg-[#eaeaea] font-sans">
+      <div className="w-198.5 min-h-280.75 bg-[#edf2f5] shadow-[0_0_20px_rgba(0,0,0,0.15)] leading-relaxed">
         <IntroRow />
 
         {/* main row */}
