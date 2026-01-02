@@ -3,28 +3,66 @@ type ModalProps = {
   onClose: () => void;
 };
 
+function Modal(props: ModalProps) {
+  if (!props.isOpen) return null;
 
-function Modal(props:ModalProps){
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
+      <div className="bg-white rounded-lg p-6 relative w-150 h-150 ">
 
-    if(!props.isOpen) return null
+        {/* main column */}
+        <div className="flex flex-col">
+        <div className="flex flex-row  justify-between align-middle items-center bg-amber-300">
+          <div className="h-10 w-25 justify-center items-center align-middle flex flex-col">✍️ Adjouter</div>
 
-    return  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
-      
-      <div className="bg-white rounded-lg p-6 w-[400px] relative h-[50%] w-90">
-        <button
-          onClick={props.onClose}
-          className="absolute top-2 right-2 text-gray-500 cursor-pointer"
+          {/* buttons container */}
+          <div className="flex flex-row justify-center">
+            <button
+              onClick={props.onClose}
+              className="cursor-pointer h-10 w-25 font-bold text-black mr-5"
+            >
+              CANCEL
+            </button>
+
+            <button
+          
+          className=" cursor-pointer h-10 w-25 bg-pink-500 text-white font-bold"
         >
-          ✕
+          + ADD
         </button>
+          </div>
+        </div>
 
-        <h2 className="text-lg font-bold mb-2">Add Item</h2>
-        <p>This is a sample Modal</p>
+        {/* main content in modal */}
+        <div>
+
+        </div>
+
+
+        {/* bottom row of modal */}
+        <div className="flex flex-row">
+          <button
+              onClick={props.onClose}
+              className="cursor-pointer h-10 w-25 font-bold text-black mr-5"
+            >
+              CANCEL
+            </button>
+
+            <button
+          
+          className=" cursor-pointer h-10 w-25 bg-pink-500 text-white font-bold"
+        >
+          + ADD
+        </button>
+        </div>
+
+
+        </div>
+
+
       </div>
     </div>
-
+  );
 }
 
-
-
-export default Modal
+export default Modal;

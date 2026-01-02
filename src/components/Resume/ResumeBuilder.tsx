@@ -34,7 +34,7 @@ function ResumeBuilder() {
           <div className="flex flex-col w-[65%] ">
             <PersonalDetails />
 
-            {Object.entries(resume).map(([key, value]) => {
+            {Object.entries(resume.sections).map(([key, value]) => {
               if (!Array.isArray(value)) return null;
               return <GeneralComponent key={key} title={key} data={value} />;
             })}
@@ -42,7 +42,7 @@ function ResumeBuilder() {
 
           {/* right side column*/}
           <div className="flex flex-col w-[35%] ">
-             {Object.entries(resume).map(([key, value]) => {
+             {Object.entries(resume.sections).map(([key, value]) => {
               if (!Array.isArray(value)) return null;
               return <GeneralComponent key={key} title={key} data={value} />;
             })}

@@ -4,10 +4,12 @@ import TrashIcon from "../Icons/TrashIcon";
 import PlusIcon from "../Icons/PlusIcon";
 import EditIcon from "../Icons/EditIcon";
 
-type SubSection = {
-  heading?: string;
+export type SubSection = {
+  id: string;
+  heading: string;
   description?: string;
   designation?: string;
+  company?: string;
   icon?: string;
   iconDesc?: string;
 };
@@ -45,14 +47,14 @@ function GeneralComponent(props: GeneralComponentProps) {
 
       {/* Body */}
       <div className="bg-white ml-5 pl-5 pt-5">
-        {props.data.map((item, idx) => {
+        {props.data.map((item) => {
           return (
             <InsideComponent
-              key={idx}
+              id={item.id}
               heading={item.heading}
               description={item.description}
-              designation={item.designation}
-            />
+              designation={item.designation} 
+              />
           );
         })}
       </div>
