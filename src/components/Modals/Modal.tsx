@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { SubSection } from "../Resume Component/GeneralComponent";
+import { v4 as uuidv4 } from "uuid";
 
 type ModalProps = {
   isOpen: boolean;
@@ -9,7 +10,7 @@ type ModalProps = {
 };
 
 function Modal(props: ModalProps) {
-  if (!props.isOpen || !props.sectionData) return null;
+  if (!props.isOpen || !props.sectionData || props.sectionData.length === 0) return null;
 
   const firstItem = props.sectionData[0];
 
@@ -17,9 +18,9 @@ function Modal(props: ModalProps) {
 
   const [formValues, setFormValues] = useState<Record<string, string>>(
     fields.reduce(
-      (val, key) => {
-        val[key] = "";
-        return val;
+      (acc, key) => {
+        acc[key] = "";
+        return acc;
       },
       {} as Record<string, string>
     )
@@ -33,7 +34,7 @@ function Modal(props: ModalProps) {
     if (!formValues.heading) return alert("Heading is required");
 
     const newItem: SubSection = {
-      id: `${Date.now()}`,
+      id: uuidv4(),
       heading: formValues.heading,
       description: formValues.description,
       designation: formValues.designation,

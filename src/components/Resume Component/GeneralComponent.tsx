@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modals/Modal";
 import TrashIcon from "../Icons/TrashIcon";
 import PlusIcon from "../Icons/PlusIcon";
@@ -22,10 +22,15 @@ type GeneralComponentProps = {
 function GeneralComponent(props: GeneralComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSectionData, setActiveSectionData] = useState<SubSection[] | null>(null);
-  const [items, setItems] = useState<SubSection[]>(props.data);
+  // const [items, setItems] = useState<SubSection[]>(props.data);
+    const [items, setItems] = useState<SubSection[]>([])
+
+   useEffect(() => {
+    setItems(props.data);
+  }, [props.data]);
 
   const handleAddItem = (newItem: SubSection) => {
-    setItems([...items, newItem]);
+    setItems((prevItems) => [...prevItems, newItem]);
   };
 
   return (
@@ -65,6 +70,7 @@ function GeneralComponent(props: GeneralComponentProps) {
         {items.map((item) => {
           return (
             <InsideComponent
+            key={item.id}
               id={item.id}
               heading={item.heading}
               description={item.description}
