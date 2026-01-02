@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modals/Modal";
 import TrashIcon from "../Icons/TrashIcon";
 import PlusIcon from "../Icons/PlusIcon";
@@ -21,10 +21,26 @@ type GeneralComponentProps = {
 
 function GeneralComponent(props: GeneralComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeSectionData, setActiveSectionData] = useState<SubSection[] | null>(null);
+  // const [items, setItems] = useState<SubSection[]>(props.data);
+    const [items, setItems] = useState<SubSection[]>([])
+
+   useEffect(() => {
+    setItems(props.data);
+  }, [props.data]);
+
+  const handleAddItem = (newItem: SubSection) => {
+    setItems((prevItems) => [...prevItems, newItem]);
+  };
 
   return (
     <div className="group relative hover:bg-gray-300 mr-7">
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        sectionData={activeSectionData}
+        onAdd={handleAddItem}
+      />
 
       {/* Header */}
       <div className="flex flex-col">
@@ -34,7 +50,11 @@ function GeneralComponent(props: GeneralComponentProps) {
               <TrashIcon />
             </button>
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                setIsModalOpen(true);
+
+                setActiveSectionData(props.data);
+              }}
               className="px-2 text-sm flex"
             >
               <PlusIcon /> <span>ADD</span>
@@ -47,14 +67,15 @@ function GeneralComponent(props: GeneralComponentProps) {
 
       {/* Body */}
       <div className="bg-white ml-5 pl-5 pt-5">
-        {props.data.map((item) => {
+        {items.map((item) => {
           return (
             <InsideComponent
+            key={item.id}
               id={item.id}
               heading={item.heading}
               description={item.description}
-              designation={item.designation} 
-              />
+              designation={item.designation}
+            />
           );
         })}
       </div>
