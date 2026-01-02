@@ -4,58 +4,59 @@ import TrashIcon from "../Icons/TrashIcon";
 import PlusIcon from "../Icons/PlusIcon";
 import EditIcon from "../Icons/EditIcon";
 
-type SubSection = {
-  heading?: string;
+export type SubSection = {
+  id: string;
+  heading: string;
   description?: string;
   designation?: string;
+  company?: string;
   icon?: string;
   iconDesc?: string;
 };
 
 type GeneralComponentProps = {
   title: string;
-  subSections: SubSection[];
+  data: SubSection[];
 };
 
 function GeneralComponent(props: GeneralComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="group relative hover:bg-gray-300">
+    <div className="group relative hover:bg-gray-300 mr-7">
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-      <span className="flex flex-col ">
-        <div className="opacity-0 group-hover:opacity-100 ">
-          <div className="bg-black flex flex-row text-white w-25 h-5 justify-center">
-            {/* dustbin button*/}
-            <button className=" px-2 cursor-pointer">
+      {/* Header */}
+      <div className="flex flex-col">
+        <div className="opacity-0 group-hover:opacity-100">
+          <div className="bg-black flex text-white w-25 h-5 justify-center">
+            <button className="px-2">
               <TrashIcon />
             </button>
-
-            {/* +ADD button */}
-
             <button
               onClick={() => setIsModalOpen(true)}
-              className=" px-2 text-sm flex flex-row justify-center cursor-pointer"
+              className="px-2 text-sm flex"
             >
-              <PlusIcon /> <span>ADD</span>{" "}
+              <PlusIcon /> <span>ADD</span>
             </button>
           </div>
         </div>
-        <h2 className="font-bold text-xl pb-3">{props.title}</h2>
-      </span>
 
+        <h2 className="font-bold text-xl pb-3">{props.title}</h2>
+      </div>
+
+      {/* Body */}
       <div className="bg-white ml-5 pl-5 pt-5">
-        {props.subSections.map((section, idx) => (
-          <InsideComponent
-            key={idx}
-            heading={section.heading}
-            designation={section.designation}
-            description={section.description}
-            icon={section.icon}
-            iconDesc={section.iconDesc}
-          />
-        ))}
+        {props.data.map((item) => {
+          return (
+            <InsideComponent
+              id={item.id}
+              heading={item.heading}
+              description={item.description}
+              designation={item.designation} 
+              />
+          );
+        })}
       </div>
     </div>
   );
@@ -64,13 +65,13 @@ function GeneralComponent(props: GeneralComponentProps) {
 function InsideComponent(props: SubSection) {
   return (
     <div className="pb-3 ">
-      <span className="flex flex-row justify-between ">
+      <div className="flex flex-row justify-between ">
         {!props.icon && (
           <div className="font-bold text-xs ">{props.heading}</div>
         )}
 
         {/* hover container */}
-        <span className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
+        <div className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
           {/* edit button */}
           <button className="cursor-pointer">
             <EditIcon />
@@ -80,8 +81,8 @@ function InsideComponent(props: SubSection) {
           <button className="cursor-pointer">
             <TrashIcon />
           </button>
-        </span>
-      </span>
+        </div>
+      </div>
 
       {props.icon && (
         <div className="flex flex-row">
