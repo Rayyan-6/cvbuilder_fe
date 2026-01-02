@@ -21,7 +21,7 @@ function GeneralComponent(props: GeneralComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="group relative hover:bg-gray-300">
+    <div className="group relative hover:bg-gray-300 mr-7">
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       {/* Header */}
