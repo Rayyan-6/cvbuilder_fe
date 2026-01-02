@@ -1,6 +1,6 @@
 import IntroRow from "./IntroRow";
 import PersonalDetails from "./personalDetails";
-import GeneralComponent2 from "../Resume Component/GeneralComponent2";
+import GeneralComponent from "../Resume Component/GeneralComponent";
 import { resumeMock } from "../../../resume.mock";
 import { useState } from "react";
 
@@ -36,7 +36,7 @@ function ResumeBuilder() {
 
             {Object.entries(resume).map(([key, value]) => {
               if (!Array.isArray(value)) return null;
-              return <GeneralComponent2 key={key} title={key} data={value} />;
+              return <GeneralComponent key={key} title={key} data={value} />;
             })}
           </div>
 
