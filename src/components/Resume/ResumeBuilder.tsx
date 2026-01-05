@@ -24,43 +24,44 @@ function ResumeBuilder() {
   const [resume, setResume] = useState(resumeMock);
 
   function handleSectionDelete(title: string) {
-  setResume((prev) => ({
-    ...prev,
-    sections: Object.fromEntries(
-      Object.entries(prev.sections).filter(([key]) => key !== title)
-    ),
-  }));
-}
+    setResume((prev) => ({
+      ...prev,
+      sections: Object.fromEntries(
+        Object.entries(prev.sections).filter(([key]) => key !== title)
+      ),
+    }));
+  }
 
   return (
     <div className="min-h-screen flex justify-center py-10 bg-[#eaeaea] font-sans">
-      <div className="w-198.5 min-h-280.75 bg-[#edf2f5] shadow-[0_0_20px_rgba(0,0,0,0.15)] leading-relaxed">
+      <div className="w-198.5 h-280.75 bg-[#edf2f5] shadow-[0_0_20px_rgba(0,0,0,0.15)] leading-relaxed">
         <IntroRow {...resume.personalInfo} />
 
         {/* main row */}
-        <div className="flex flex-row w-full h-[93%] pl-10">
-          {/* left side column */}
-          <div className="flex flex-col w-[65%] ">
-            <PersonalDetails {...resume.personalInfo} />
+
+        <div className="w-full h-[93%] pl-10">
+          <div className="columns-2 gap-10 h-full [column-fill:_auto]">
+            <div className="break-inside-avoid mb-6 ">
+              <PersonalDetails {...resume.personalInfo} />
+            </div>
+
             {Object.entries(resume.sections).map(([key, value]) => {
               if (!Array.isArray(value)) return null;
-              return <GeneralComponent key={key} title={key} data={value} onSectionDelete={handleSectionDelete} />;
-            })}
-          </div>
-
-          {/* right side column*/}
-          <div className="flex flex-col w-[35%] ">
-             {Object.entries(resume.sections).map(([key, value]) => {
-              if (!Array.isArray(value)) return null;
-              return <GeneralComponent key={key} title={key} data={value} onSectionDelete={handleSectionDelete} />;
+              return (
+                <div key={key} className="break-inside-avoid mb-4">
+                  <GeneralComponent
+                    title={key}
+                    data={value}
+                    onSectionDelete={handleSectionDelete}
+                  />
+                </div>
+              );
             })}
           </div>
         </div>
       </div>
     </div>
   );
-
-
 }
 
 export default ResumeBuilder;

@@ -12,7 +12,6 @@ export type SubSection = {
   company?: string;
   icon?: string;
   iconDesc?: string;
-  
 };
 
 type GeneralComponentProps = {
@@ -27,14 +26,14 @@ function GeneralComponent(props: GeneralComponentProps) {
     SubSection[] | null
   >(null);
   const [items, setItems] = useState<SubSection[]>([]);
-  const [editedItem, setEditedItem] = useState<SubSection | null>(null)
+  const [editedItem, setEditedItem] = useState<SubSection | null>(null);
 
   useEffect(() => {
     setItems(props.data);
   }, [props.data]);
 
   const handleAddItem = (newItem: SubSection) => {
-    console.log("add item called")
+    console.log("add item called");
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
@@ -43,13 +42,11 @@ function GeneralComponent(props: GeneralComponentProps) {
   }
 
   function handleItemEdit(id: string) {
-    const itemToEdit = items.find(item=>item.id===id)
-    if(!itemToEdit) return;
-    setActiveSectionData([itemToEdit])
-    setEditedItem(itemToEdit)
+    const itemToEdit = items.find((item) => item.id === id);
+    if (!itemToEdit) return;
+    setActiveSectionData([itemToEdit]);
+    setEditedItem(itemToEdit);
     setIsModalOpen(true);
-   
-    
   }
 
   return (
@@ -59,8 +56,10 @@ function GeneralComponent(props: GeneralComponentProps) {
         onClose={() => setIsModalOpen(false)}
         sectionData={activeSectionData}
         onAdd={handleAddItem}
-        onEdit={(editedItem:SubSection)=>{
-          setItems(prev=>prev.map(item=>item.id===editedItem.id?editedItem:item))
+        onEdit={(editedItem: SubSection) => {
+          setItems((prev) =>
+            prev.map((item) => (item.id === editedItem.id ? editedItem : item))
+          );
         }}
         editedItem={editedItem}
       />
@@ -69,12 +68,15 @@ function GeneralComponent(props: GeneralComponentProps) {
       <div className="flex flex-col">
         <div className="opacity-0 group-hover:opacity-100">
           <div className="bg-black flex text-white w-25 h-5 justify-center">
-            <button className="px-2" onClick={()=>props.onSectionDelete(props.title)}>
+            <button
+              className="px-2"
+              onClick={() => props.onSectionDelete(props.title)}
+            >
               <TrashIcon />
             </button>
             <button
               onClick={() => {
-                setEditedItem(null)
+                setEditedItem(null);
                 setIsModalOpen(true);
                 setActiveSectionData(props.data);
               }}
@@ -108,7 +110,11 @@ function GeneralComponent(props: GeneralComponentProps) {
   );
 }
 
-function InsideComponent(props: SubSection & { onDelete: (id: string) => void } & { onEdit: (id: string) => void }) {
+function InsideComponent(
+  props: SubSection & { onDelete: (id: string) => void } & {
+    onEdit: (id: string) => void;
+  }
+) {
   return (
     <div className="pb-3 ">
       <div className="flex flex-row justify-between ">
