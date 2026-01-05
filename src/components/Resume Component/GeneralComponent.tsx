@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modals/Modal";
 import TrashIcon from "../Icons/TrashIcon";
 import PlusIcon from "../Icons/PlusIcon";
@@ -12,6 +12,7 @@ export type SubSection = {
   company?: string;
   icon?: string;
   iconDesc?: string;
+  
 };
 
 type GeneralComponentProps = {
@@ -21,10 +22,47 @@ type GeneralComponentProps = {
 
 function GeneralComponent(props: GeneralComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeSectionData, setActiveSectionData] = useState<
+    SubSection[] | null
+  >(null);
+  const [items, setItems] = useState<SubSection[]>([]);
+  const [editedItem, setEditedItem] = useState<SubSection | null>(null)
+
+  useEffect(() => {
+    setItems(props.data);
+  }, [props.data]);
+
+  const handleAddItem = (newItem: SubSection) => {
+    console.log("add item called")
+    setItems((prevItems) => [...prevItems, newItem]);
+  };
+
+  function handleItemDelete(id: string) {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  }
+
+  function handleItemEdit(id: string) {
+    const itemToEdit = items.find(item=>item.id===id)
+    if(!itemToEdit) return;
+    setActiveSectionData([itemToEdit])
+    setEditedItem(itemToEdit)
+    setIsModalOpen(true);
+   
+    
+  }
 
   return (
     <div className="group relative hover:bg-gray-300 mr-7">
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        sectionData={activeSectionData}
+        onAdd={handleAddItem}
+        onEdit={(editedItem:SubSection)=>{
+          setItems(prev=>prev.map(item=>item.id===editedItem.id?editedItem:item))
+        }}
+        editedItem={editedItem}
+      />
 
       {/* Header */}
       <div className="flex flex-col">
@@ -34,7 +72,11 @@ function GeneralComponent(props: GeneralComponentProps) {
               <TrashIcon />
             </button>
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                setEditedItem(null)
+                setIsModalOpen(true);
+                setActiveSectionData(props.data);
+              }}
               className="px-2 text-sm flex"
             >
               <PlusIcon /> <span>ADD</span>
@@ -47,14 +89,17 @@ function GeneralComponent(props: GeneralComponentProps) {
 
       {/* Body */}
       <div className="bg-white ml-5 pl-5 pt-5">
-        {props.data.map((item) => {
+        {items.map((item) => {
           return (
             <InsideComponent
+              key={item.id}
               id={item.id}
               heading={item.heading}
               description={item.description}
-              designation={item.designation} 
-              />
+              designation={item.designation}
+              onDelete={handleItemDelete}
+              onEdit={handleItemEdit}
+            />
           );
         })}
       </div>
@@ -62,7 +107,7 @@ function GeneralComponent(props: GeneralComponentProps) {
   );
 }
 
-function InsideComponent(props: SubSection) {
+function InsideComponent(props: SubSection & { onDelete: (id: string) => void } & { onEdit: (id: string) => void }) {
   return (
     <div className="pb-3 ">
       <div className="flex flex-row justify-between ">
@@ -73,12 +118,18 @@ function InsideComponent(props: SubSection) {
         {/* hover container */}
         <div className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
           {/* edit button */}
-          <button className="cursor-pointer">
+          <button
+            className="cursor-pointer"
+            onClick={() => props.onEdit(props.id)}
+          >
             <EditIcon />
           </button>
 
           {/* delete dustbin */}
-          <button className="cursor-pointer">
+          <button
+            className="cursor-pointer"
+            onClick={() => props.onDelete(props.id)}
+          >
             <TrashIcon />
           </button>
         </div>
