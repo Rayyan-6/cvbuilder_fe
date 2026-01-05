@@ -26,17 +26,13 @@ function ResumeBuilder() {
   return (
     <div className="min-h-screen flex justify-center py-10 bg-[#eaeaea] font-sans">
       <div className="w-198.5 min-h-280.75 bg-[#edf2f5] shadow-[0_0_20px_rgba(0,0,0,0.15)] leading-relaxed">
-        <IntroRow />
+        <IntroRow {...resume.personalInfo} />
 
         {/* main row */}
         <div className="flex flex-row w-full h-[93%] pl-10">
           {/* left side column */}
           <div className="flex flex-col w-[65%] ">
-            {/* <PersonalDetails /> */}
-            {/* {Object.entries(resume.personalInfo).map(([key, value]) => {
-              if (!Array.isArray(value)) return null;
-              return <PersonalDetails {...resume.personalInfo}/>;
-            })} */}
+            
             <PersonalDetails {...resume.personalInfo} />
 
 
