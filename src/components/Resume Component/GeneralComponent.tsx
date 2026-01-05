@@ -100,6 +100,7 @@ function GeneralComponent(props: GeneralComponentProps) {
               heading={item.heading}
               description={item.description}
               designation={item.designation}
+              company={item.company}
               onDelete={handleItemDelete}
               onEdit={handleItemEdit}
             />
@@ -150,6 +151,7 @@ function InsideComponent(
       )}
 
       {props.designation && <div className="text-xs ">{props.designation}</div>}
+      {props.company && <div className="text-xs">{props.company}</div>}
       {props.description && <div className="text-xs ">{props.description}</div>}
     </div>
   );

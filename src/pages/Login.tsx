@@ -18,7 +18,7 @@ export const Login = () => {
       setToken(res.data.access_token);
       // localStorage.setItem('token', res.data.access_token);
 
-      navigate("/dashboard");
+      navigate("/resume-builder");
       alert("Login successful!");
     } catch (err: any) {
       alert(err.response?.data?.message || "Error logging in");

@@ -1,9 +1,8 @@
 
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
-import { Dashboard } from './pages/Dashboard';
 import { PrivateRoute } from './components/PrivateRoute';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
@@ -17,16 +16,9 @@ function App() {
     <>
        <Router>
       <Routes>
+        <Route path='/' element={(<Navigate to='/resume-builder' />)} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-         <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute isAuthenticated={!!token}>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
 
         <Route
             path="/resume-builder"

@@ -15,7 +15,7 @@ export const Signup = () => {
     try {
       const res = await signup({ email, password });
       setToken(res.data.access_token); 
-      navigate('/dashboard');   
+      navigate('/resume-builder');   
       alert('Signup successful!');
       console.log(res.data);
     } catch (err: any) {
