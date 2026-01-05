@@ -12,7 +12,7 @@ export type SubSection = {
   company?: string;
   icon?: string;
   iconDesc?: string;
-  onDelete: (id: string) => void
+  
 };
 
 type GeneralComponentProps = {
@@ -22,10 +22,12 @@ type GeneralComponentProps = {
 
 function GeneralComponent(props: GeneralComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSectionData, setActiveSectionData] = useState<SubSection[] | null>(null);
-  const [items, setItems] = useState<SubSection[]>([])
+  const [activeSectionData, setActiveSectionData] = useState<
+    SubSection[] | null
+  >(null);
+  const [items, setItems] = useState<SubSection[]>([]);
 
-   useEffect(() => {
+  useEffect(() => {
     setItems(props.data);
   }, [props.data]);
 
@@ -33,9 +35,14 @@ function GeneralComponent(props: GeneralComponentProps) {
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
-  function handleItemDelete(id:string){
-    setItems((prevItems)=>prevItems.filter(item=>item.id !==id))
-}
+  function handleItemDelete(id: string) {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  }
+
+  function handleItemEdit(id: string) {
+    setIsModalOpen(true);
+    setActiveSectionData(props.data);
+  }
 
   return (
     <div className="group relative hover:bg-gray-300 mr-7">
@@ -56,7 +63,6 @@ function GeneralComponent(props: GeneralComponentProps) {
             <button
               onClick={() => {
                 setIsModalOpen(true);
-
                 setActiveSectionData(props.data);
               }}
               className="px-2 text-sm flex"
@@ -74,12 +80,13 @@ function GeneralComponent(props: GeneralComponentProps) {
         {items.map((item) => {
           return (
             <InsideComponent
-            key={item.id}
+              key={item.id}
               id={item.id}
               heading={item.heading}
               description={item.description}
               designation={item.designation}
               onDelete={handleItemDelete}
+              onEdit={handleItemEdit}
             />
           );
         })}
@@ -88,9 +95,7 @@ function GeneralComponent(props: GeneralComponentProps) {
   );
 }
 
-
-
-function InsideComponent(props: SubSection) {
+function InsideComponent(props: SubSection & { onDelete: (id: string) => void } & { onEdit: (id: string) => void }) {
   return (
     <div className="pb-3 ">
       <div className="flex flex-row justify-between ">
@@ -101,12 +106,18 @@ function InsideComponent(props: SubSection) {
         {/* hover container */}
         <div className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
           {/* edit button */}
-          <button className="cursor-pointer">
+          <button
+            className="cursor-pointer"
+            onClick={() => props.onEdit(props.id)}
+          >
             <EditIcon />
           </button>
 
           {/* delete dustbin */}
-          <button className="cursor-pointer" onClick={()=>props.onDelete(props.id)}>
+          <button
+            className="cursor-pointer"
+            onClick={() => props.onDelete(props.id)}
+          >
             <TrashIcon />
           </button>
         </div>
