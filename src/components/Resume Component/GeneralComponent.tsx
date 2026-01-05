@@ -12,6 +12,7 @@ export type SubSection = {
   company?: string;
   icon?: string;
   iconDesc?: string;
+  onDelete: (id: string) => void
 };
 
 type GeneralComponentProps = {
@@ -22,8 +23,7 @@ type GeneralComponentProps = {
 function GeneralComponent(props: GeneralComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSectionData, setActiveSectionData] = useState<SubSection[] | null>(null);
-  // const [items, setItems] = useState<SubSection[]>(props.data);
-    const [items, setItems] = useState<SubSection[]>([])
+  const [items, setItems] = useState<SubSection[]>([])
 
    useEffect(() => {
     setItems(props.data);
@@ -32,6 +32,10 @@ function GeneralComponent(props: GeneralComponentProps) {
   const handleAddItem = (newItem: SubSection) => {
     setItems((prevItems) => [...prevItems, newItem]);
   };
+
+  function handleItemDelete(id:string){
+    setItems((prevItems)=>prevItems.filter(item=>item.id !==id))
+}
 
   return (
     <div className="group relative hover:bg-gray-300 mr-7">
@@ -75,6 +79,7 @@ function GeneralComponent(props: GeneralComponentProps) {
               heading={item.heading}
               description={item.description}
               designation={item.designation}
+              onDelete={handleItemDelete}
             />
           );
         })}
@@ -82,6 +87,8 @@ function GeneralComponent(props: GeneralComponentProps) {
     </div>
   );
 }
+
+
 
 function InsideComponent(props: SubSection) {
   return (
@@ -99,7 +106,7 @@ function InsideComponent(props: SubSection) {
           </button>
 
           {/* delete dustbin */}
-          <button className="cursor-pointer">
+          <button className="cursor-pointer" onClick={()=>props.onDelete(props.id)}>
             <TrashIcon />
           </button>
         </div>
