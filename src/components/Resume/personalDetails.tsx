@@ -1,7 +1,7 @@
 import type { personalInfoType } from "../../types/personalInfo.type";
 
 function PersonalDetails(props: personalInfoType) {
-  const entries = Object.entries(props).filter(([key]) => key !== "id").filter(([key]) => key !== "name").filter(([key]) => key !== "position");
+  const entries = Object.entries(props).filter(([key]) => key !== "id").filter(([key]) => !["id", "name", "position"].includes(key));
   return (
     <>
       <div className=" w-full grid grid-cols-2 pt-5">

@@ -32,10 +32,7 @@ function ResumeBuilder() {
         <div className="flex flex-row w-full h-[93%] pl-10">
           {/* left side column */}
           <div className="flex flex-col w-[65%] ">
-            
             <PersonalDetails {...resume.personalInfo} />
-
-
             {Object.entries(resume.sections).map(([key, value]) => {
               if (!Array.isArray(value)) return null;
               return <GeneralComponent key={key} title={key} data={value} />;
