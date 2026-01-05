@@ -18,6 +18,7 @@ export type SubSection = {
 type GeneralComponentProps = {
   title: string;
   data: SubSection[];
+  onSectionDelete: (title: string) => void;
 };
 
 function GeneralComponent(props: GeneralComponentProps) {
@@ -68,7 +69,7 @@ function GeneralComponent(props: GeneralComponentProps) {
       <div className="flex flex-col">
         <div className="opacity-0 group-hover:opacity-100">
           <div className="bg-black flex text-white w-25 h-5 justify-center">
-            <button className="px-2">
+            <button className="px-2" onClick={()=>props.onSectionDelete(props.title)}>
               <TrashIcon />
             </button>
             <button

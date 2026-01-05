@@ -23,6 +23,15 @@ export type Experience = {
 function ResumeBuilder() {
   const [resume, setResume] = useState(resumeMock);
 
+  function handleSectionDelete(title: string) {
+  setResume((prev) => ({
+    ...prev,
+    sections: Object.fromEntries(
+      Object.entries(prev.sections).filter(([key]) => key !== title)
+    ),
+  }));
+}
+
   return (
     <div className="min-h-screen flex justify-center py-10 bg-[#eaeaea] font-sans">
       <div className="w-198.5 min-h-280.75 bg-[#edf2f5] shadow-[0_0_20px_rgba(0,0,0,0.15)] leading-relaxed">
@@ -35,7 +44,7 @@ function ResumeBuilder() {
             <PersonalDetails {...resume.personalInfo} />
             {Object.entries(resume.sections).map(([key, value]) => {
               if (!Array.isArray(value)) return null;
-              return <GeneralComponent key={key} title={key} data={value} />;
+              return <GeneralComponent key={key} title={key} data={value} onSectionDelete={handleSectionDelete} />;
             })}
           </div>
 
@@ -43,7 +52,7 @@ function ResumeBuilder() {
           <div className="flex flex-col w-[35%] ">
              {Object.entries(resume.sections).map(([key, value]) => {
               if (!Array.isArray(value)) return null;
-              return <GeneralComponent key={key} title={key} data={value} />;
+              return <GeneralComponent key={key} title={key} data={value} onSectionDelete={handleSectionDelete} />;
             })}
           </div>
         </div>
