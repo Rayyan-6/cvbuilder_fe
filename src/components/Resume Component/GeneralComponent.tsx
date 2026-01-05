@@ -26,12 +26,14 @@ function GeneralComponent(props: GeneralComponentProps) {
     SubSection[] | null
   >(null);
   const [items, setItems] = useState<SubSection[]>([]);
+  const [editedItem, setEditedItem] = useState<SubSection | null>(null)
 
   useEffect(() => {
     setItems(props.data);
   }, [props.data]);
 
   const handleAddItem = (newItem: SubSection) => {
+    console.log("add item called")
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
@@ -40,8 +42,13 @@ function GeneralComponent(props: GeneralComponentProps) {
   }
 
   function handleItemEdit(id: string) {
+    const itemToEdit = items.find(item=>item.id===id)
+    if(!itemToEdit) return;
+    setActiveSectionData([itemToEdit])
+    setEditedItem(itemToEdit)
     setIsModalOpen(true);
-    setActiveSectionData(props.data);
+   
+    
   }
 
   return (
@@ -51,6 +58,10 @@ function GeneralComponent(props: GeneralComponentProps) {
         onClose={() => setIsModalOpen(false)}
         sectionData={activeSectionData}
         onAdd={handleAddItem}
+        onEdit={(editedItem:SubSection)=>{
+          setItems(prev=>prev.map(item=>item.id===editedItem.id?editedItem:item))
+        }}
+        editedItem={editedItem}
       />
 
       {/* Header */}
@@ -62,6 +73,7 @@ function GeneralComponent(props: GeneralComponentProps) {
             </button>
             <button
               onClick={() => {
+                setEditedItem(null)
                 setIsModalOpen(true);
                 setActiveSectionData(props.data);
               }}
