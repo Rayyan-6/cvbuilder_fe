@@ -69,7 +69,7 @@ function GeneralComponent(props: GeneralComponentProps) {
         <div className="opacity-0 group-hover:opacity-100">
           <div className="bg-black flex text-white w-25 h-5 justify-center">
             <button
-              className="px-2"
+              className="px-2 cursor-pointer"
               onClick={() => props.onSectionDelete(props.title)}
             >
               <TrashIcon />
@@ -80,7 +80,7 @@ function GeneralComponent(props: GeneralComponentProps) {
                 setIsModalOpen(true);
                 setActiveSectionData(props.data);
               }}
-              className="px-2 text-sm flex"
+              className="px-2 text-sm flex cursor-pointer"
             >
               <PlusIcon /> <span>ADD</span>
             </button>

@@ -70,7 +70,7 @@ function Modal(props: ModalProps) {
 
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
-        <div className="bg-white rounded-lg p-6 relative w-150 h-150 ">
+        <div className="bg-white rounded-lg p-6 relative w-150 h-200 ">
           {/* main column */}
           <div className="flex flex-col justify-between h-full">
             <div className="flex flex-row  justify-between align-middle items-center ">
