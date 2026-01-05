@@ -4,6 +4,7 @@ export const resumeMock: ResumeType = {
   personalInfo: {
     id: "p",
     name: "Muhammad Rayyan",
+    position: "Software Engineer",
     email: "test@example.com",
     phone: "+92-111-1234567",
     address: "Lahore",
