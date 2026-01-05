@@ -4,6 +4,7 @@ export const resumeMock: ResumeType = {
   personalInfo: {
     id: "p",
     name: "Muhammad Rayyan",
+    position: "Software Engineer",
     email: "test@example.com",
     phone: "+92-111-1234567",
     address: "Lahore",
@@ -12,6 +13,23 @@ export const resumeMock: ResumeType = {
   },
   sections: {
     languages: [
+      {
+        id: "l1",
+        heading: "English",
+        description: "Professional",
+      },
+      {
+        id: "l2",
+        heading: "Urdu",
+        description: "Native",
+      },
+      {
+        id: "l3",
+        heading: "Spanish",
+        description: "Starter",
+      },
+    ],
+    languages2: [
       {
         id: "l1",
         heading: "English",
@@ -60,8 +78,25 @@ export const resumeMock: ResumeType = {
         description: "ali.khan@example.com",
       },
     ],
-    
-
+    references2: [
+      {
+        id: "r1",
+        heading: "Ali Khan",
+        designation: "Senior Software Engineer",
+        company: "Tech Solutions Pvt Ltd",
+        description: "ali.khan@example.com",
+      },
+    ],
+    references3: [
+      {
+        id: "r1",
+        heading: "Ali Khan",
+        designation: "Senior Software Engineer",
+        company: "Tech Solutions Pvt Ltd",
+        description: "ali.khan@example.com",
+      },
+    ],
+  
     travel: [
       {
         id: "t1",
@@ -69,5 +104,6 @@ export const resumeMock: ResumeType = {
         description: "I went to USA for travelling",
       },
     ],
+    
   },
 };
