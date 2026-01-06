@@ -18,6 +18,7 @@ type GeneralComponentProps = {
   title: string;
   data: SubSection[];
   onSectionDelete: (title: string) => void;
+  onSectionUpdate?: (title: string, items: any[]) => void;
 };
 
 function GeneralComponent(props: GeneralComponentProps) {
@@ -27,6 +28,7 @@ function GeneralComponent(props: GeneralComponentProps) {
   >(null);
   const [items, setItems] = useState<SubSection[]>([]);
   const [editedItem, setEditedItem] = useState<SubSection | null>(null);
+  const [item, setItem] = useState([])
 
   useEffect(() => {
     setItems(props.data);
@@ -34,11 +36,19 @@ function GeneralComponent(props: GeneralComponentProps) {
 
   const handleAddItem = (newItem: SubSection) => {
     console.log("add item called");
-    setItems((prevItems) => [...prevItems, newItem]);
+    setItems((prevItems) => {
+      const updated = [...prevItems, newItem];
+      props.onSectionUpdate?.(props.title, updated);
+      return updated;
+    });
   };
 
   function handleItemDelete(id: string) {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setItems((prevItems) => {
+      const updated = prevItems.filter((item) => item.id !== id);
+      props.onSectionUpdate?.(props.title, updated);
+      return updated;
+    });
   }
 
   function handleItemEdit(id: string) {
@@ -49,20 +59,28 @@ function GeneralComponent(props: GeneralComponentProps) {
     setIsModalOpen(true);
   }
 
+  console.log(props.title, props.data, 'modal opened----------')
+
   return (
     <div className="group relative hover:bg-gray-300 mr-7">
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        sectionData={activeSectionData}
-        onAdd={handleAddItem}
-        onEdit={(editedItem: SubSection) => {
-          setItems((prev) =>
-            prev.map((item) => (item.id === editedItem.id ? editedItem : item))
-          );
-        }}
-        editedItem={editedItem}
-      />
+      {isModalOpen ? (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          // sectionData={activeSectionData}
+          onAdd={handleAddItem}
+          onEdit={(editedItem: SubSection) => {
+            setItems((prev) => {
+              const updated = prev.map((item) =>
+                item.id === editedItem.id ? editedItem : item
+              );
+              props.onSectionUpdate?.(props.title, updated);
+              return updated;
+            });
+          }}
+          editedItem={editedItem}
+        />
+         ) : null}
 
       {/* Header */}
       <div className="flex flex-col">
@@ -80,10 +98,12 @@ function GeneralComponent(props: GeneralComponentProps) {
                 setIsModalOpen(true);
                 setActiveSectionData(props.data);
               }}
+
               className="px-2 text-sm flex cursor-pointer"
             >
               <PlusIcon /> <span>ADD</span>
             </button>
+
           </div>
         </div>
 

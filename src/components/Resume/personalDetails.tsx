@@ -1,69 +1,61 @@
 import { useState } from "react";
 import type { personalInfoType } from "../../types/personalInfo.type";
 import TrashIcon from "../Icons/TrashIcon";
-import Modal from "../Modals/Modal";
-import type { SubSection } from "../Resume Component/GeneralComponent";
 import EditIcon from "../Icons/EditIcon";
+import PersonalDetailsModal from "../Modals/PersonalDetailsModal";
 
-function PersonalDetails(props: personalInfoType) {
+function PersonalDetails(
+  props: personalInfoType & {
+    onEdit: (updatedInfo: personalInfoType) => void;
+  }
+) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSectionData, setActiveSectionData] = useState<SubSection[] | null>(null);
-  const [editedItem, setEditedItem] = useState<SubSection | null>(null);
 
-  const entries = Object.entries(props)
-    .filter(([key]) => !["id", "name", "position"].includes(key));
-
-  const combinedSubSection: SubSection = {
-    id: "personal-details",
-    heading: "Personal Details",
-    description: "",
-    ...Object.fromEntries(entries.map(([key, value]) => [key, String(value)])),
-  } as SubSection;
+  const entries = Object.entries(props).filter(
+    ([key]) => !["id", "name", "position", "onEdit"].includes(key)
+  );
 
   return (
     <div className="group relative">
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        sectionData={[combinedSubSection]} 
-        editedItem={combinedSubSection}  
-        onEdit={(updatedItem: SubSection) => {
-          console.log("Updated item from modal:", updatedItem);
-        
-        }}
-        onAdd={() => {}}
-      />
-
-      <div className="opacity-0 group-hover:opacity-100">
-        <div className="bg-black flex text-white w-25 h-5 justify-center">
-          <button className="px-2">
-            <TrashIcon />
-          </button>
+      {/* Actions */}
+      <div className="opacity-0 group-hover:opacity-100 absolute right-0 top-0">
+        <div className="bg-black flex text-white">
+          
 
           <button
-            onClick={() => {
-              setActiveSectionData([combinedSubSection]);
-              setEditedItem(combinedSubSection);
-              setIsModalOpen(true);
-            }}
-            className="px-2 text-sm flex"
-          > <EditIcon /> {"  "}
+            onClick={() => setIsModalOpen(true)}
+            className="px-2 text-sm flex items-center gap-1"
+          >
+            <EditIcon />
             <span>EDIT</span>
           </button>
         </div>
       </div>
 
-      <div className="w-full grid grid-cols-2 pt-5 ">
+      {/* List */}
+      <div className="w-full grid grid-cols-2 pt-5">
         {entries.map(([key, value]) => (
           <PersonalDetailItem key={key} myKey={key} value={value} />
         ))}
       </div>
+
+      {/* Modal */}
+      <PersonalDetailsModal
+        isOpen={isModalOpen}
+        data={props}
+        onClose={() => setIsModalOpen(false)}
+        onSave={(updated) => {
+          props.onEdit(updated);
+          setIsModalOpen(false);
+        }}
+      />
     </div>
   );
 }
 
 type PersonalDetailItemProps = {
-  value: string | boolean;
+  value: string | boolean | ((...args: any) => any);
+  // value: any;
   myKey: string;
 };
 
@@ -81,4 +73,5 @@ function PersonalDetailItem(props: PersonalDetailItemProps) {
   );
 }
 
-export default PersonalDetails;
+
+export default PersonalDetails
