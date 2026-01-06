@@ -96,7 +96,8 @@ function GeneralComponent(props: GeneralComponentProps) {
               onClick={() => {
                 setEditedItem(null);
                 setIsModalOpen(true);
-                setActiveSectionData(props.data);
+                // setActiveSectionData(props.data);
+                setActiveSectionData(null);
               }}
 
               className="px-2 text-sm flex cursor-pointer"

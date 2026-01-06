@@ -24,70 +24,74 @@ export type Experience = {
 };
 
 function ResumeBuilder() {
-  const [resume, setResume] = useState(resumeMock);
-  // const {resume, loading, saveResume} = useResume()
-  //  const [newSectionTitle, setNewSectionTitle] = useState('');
-  //  const [showNewSectionInput, setShowNewSectionInput] = useState(false);
+
+  // const [resume, setResume] = useState(resumeMock);
+
+  const {resume, loading, saveResume} = useResume()
+   const [newSectionTitle, setNewSectionTitle] = useState('');
+   const [showNewSectionInput, setShowNewSectionInput] = useState(false);
 
 
 
-  // if (loading || !resume) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading || !resume) {
+    return <div>Loading...</div>;
+  }
 
-//   function addNewSection() {
-//   if (showNewSectionInput) {
-//     const title = newSectionTitle.trim();
-//     if (!title) {
-//       alert('Please enter a section title');
-//       return;
-//     }
-//     if (resume.sections[title]) {
-//       alert('Section already exists');
-//       return;
-//     }
+  function addNewSection() {
+  if (showNewSectionInput) {
+    const title = newSectionTitle.trim();
+    if (!title) {
+      alert('Please enter a section title');
+      return;
+    }
+    if (resume.sections[title]) {
+      alert('Section already exists');
+      return;
+    }
 
-//     const updatedSections = { ...resume.sections, [title]: [] };
-//     saveResume({ sections: updatedSections });
+    const updatedSections = { ...resume.sections, [title]: [] };
+    saveResume({ sections: updatedSections });
 
-//     setNewSectionTitle('');
-//     setShowNewSectionInput(false); 
-//   } else {
+    setNewSectionTitle('');
+    setShowNewSectionInput(false); 
+  } else {
     
-//     setShowNewSectionInput(true);
-//   }
-// }
+    setShowNewSectionInput(true);
+  }
+}
   
 
   function handleSectionDelete(title: string) {
-    setResume((prev) => ({
-      ...prev,
-      sections: Object.fromEntries(
-        Object.entries(prev.sections).filter(([key]) => key !== title)
-      ),
-    }));
-    // const updatedSections = Object.fromEntries(
-    //   Object.entries(resume.sections).filter(([key]) => key !== title)
-    // );
-    // const updatedResume = { ...resume, sections: updatedSections };
-    // saveResume({ sections: updatedSections }); 
+    // setResume((prev) => ({
+    //   ...prev,
+    //   sections: Object.fromEntries(
+    //     Object.entries(prev.sections).filter(([key]) => key !== title)
+    //   ),
+    // }));
+
+
+    const updatedSections = Object.fromEntries(
+      Object.entries(resume.sections).filter(([key]) => key !== title)
+    );
+    const updatedResume = { ...resume, sections: updatedSections };
+    saveResume({ sections: updatedSections }); 
   }
 
   function handlePersonalInfoEdit(updatedInfo:personalInfoType) {
-  setResume((prev) => ({
-    ...prev,
-    personalInfo: updatedInfo,
-  }));
+  // setResume((prev) => ({
+  //   ...prev,
+  //   personalInfo: updatedInfo,
+  // }));
 
-  // const updatedResume = { ...resume, personalInfo: updatedInfo };
-  //   saveResume({ personalInfo: updatedInfo });
+  const updatedResume = { ...resume, personalInfo: updatedInfo };
+    saveResume({ personalInfo: updatedInfo });
 }
 
 
-  // function handleSectionUpdate(title: string, items: any[]) {
-  //   const updatedSections = { ...resume.sections, [title]: items };
-  //   saveResume({ sections: updatedSections });
-  // }
+  function handleSectionUpdate(title: string, items: any[]) {
+    const updatedSections = { ...resume.sections, [title]: items };
+    saveResume({ sections: updatedSections });
+  }
 
 
   return (
@@ -112,7 +116,7 @@ function ResumeBuilder() {
                     title={key}
                     data={value}
                     onSectionDelete={handleSectionDelete}
-                    // onSectionUpdate={handleSectionUpdate}
+                    onSectionUpdate={handleSectionUpdate}
                   />
                 </div>
               );
@@ -122,7 +126,7 @@ function ResumeBuilder() {
       </div>
       
 
-      {/* <div className="absolute bottom-4 right-4 flex items-center space-x-2">
+      <div className="absolute bottom-4 right-4 flex items-center space-x-2">
   {showNewSectionInput && (
     <input
       type="text"
@@ -139,7 +143,7 @@ function ResumeBuilder() {
     <PlusIcon />
     <span>{showNewSectionInput ? 'Save Section' : 'Add Section'}</span>
   </button>
-</div> */}
+</div>
 
     </div>
   );
