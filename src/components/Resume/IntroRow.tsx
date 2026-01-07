@@ -10,7 +10,6 @@ import IntroRowModal from "../Modals/IntroRowModal";
 
 // };
 
-
 type IntroRowProps = {
   personalInfo: personalInfoType;
   onEdit?: (updated: personalInfoType) => void;
@@ -21,14 +20,16 @@ function IntroRow(props: IntroRowProps) {
 
   return (
     <>
-    
       <div className="w-full pl-10 h-[7%] bg-[#24303c] flex flex-col justify-end group relative">
-        <h2 className="text-xl text-white font-bold">{props.personalInfo.name}</h2>
+        <h2 className="text-xl text-white font-bold">
+          {props.personalInfo.name}
+        </h2>
 
         <div className="flex items-center gap-2">
-          <h3 className="text-2xl text-white font-bold">{props.personalInfo.position}</h3>
+          <h3 className="text-2xl text-white font-bold">
+            {props.personalInfo.position}
+          </h3>
 
-        
           <div className="opacity-0 group-hover:opacity-100">
             <div className="bg-black flex text-white w-25 h-5 justify-center">
               <button
@@ -48,9 +49,9 @@ function IntroRow(props: IntroRowProps) {
         isOpen={isModalOpen}
         // name={props.name}
         // position={props.position}
-        personalInfo={props.personalInfo} 
+        personalInfo={props.personalInfo}
         onClose={() => setIsModalOpen(false)}
-        onSave={(updated:any) => {
+        onSave={(updated: any) => {
           props.onEdit?.(updated);
           setIsModalOpen(false);
         }}
