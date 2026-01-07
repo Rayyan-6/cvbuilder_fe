@@ -3,8 +3,17 @@ import type { personalInfoType } from "../../types/personalInfo.type";
 import EditIcon from "../Icons/EditIcon";
 import IntroRowModal from "../Modals/IntroRowModal";
 
-type IntroRowProps = personalInfoType & {
-  onEdit?: (updated: { name: string; position: string }) => void;
+// type IntroRowProps = personalInfoType & {
+//    personalInfo: personalInfoType;
+//   // onEdit?: (updated: { name: string; position: string }) => void;
+//     onEdit?: (updated: personalInfoType) => void;
+
+// };
+
+
+type IntroRowProps = {
+  personalInfo: personalInfoType;
+  onEdit?: (updated: personalInfoType) => void;
 };
 
 function IntroRow(props: IntroRowProps) {
@@ -14,10 +23,10 @@ function IntroRow(props: IntroRowProps) {
     <>
     
       <div className="w-full pl-10 h-[7%] bg-[#24303c] flex flex-col justify-end group relative">
-        <h2 className="text-xl text-white font-bold">{props.name}</h2>
+        <h2 className="text-xl text-white font-bold">{props.personalInfo.name}</h2>
 
         <div className="flex items-center gap-2">
-          <h3 className="text-2xl text-white font-bold">{props.position}</h3>
+          <h3 className="text-2xl text-white font-bold">{props.personalInfo.position}</h3>
 
         
           <div className="opacity-0 group-hover:opacity-100">
@@ -37,10 +46,11 @@ function IntroRow(props: IntroRowProps) {
       {/* Edit Modal */}
       <IntroRowModal
         isOpen={isModalOpen}
-        name={props.name}
-        position={props.position}
+        // name={props.name}
+        // position={props.position}
+        personalInfo={props.personalInfo} 
         onClose={() => setIsModalOpen(false)}
-        onSave={(updated) => {
+        onSave={(updated:any) => {
           props.onEdit?.(updated);
           setIsModalOpen(false);
         }}

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { personalInfoType } from "../../types/personalInfo.type";
-import TrashIcon from "../Icons/TrashIcon";
 import EditIcon from "../Icons/EditIcon";
 import PersonalDetailsModal from "../Modals/PersonalDetailsModal";
 

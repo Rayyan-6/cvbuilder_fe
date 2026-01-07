@@ -4,7 +4,7 @@ import GeneralComponent from "../Resume Component/GeneralComponent";
 import { resumeMock } from "../../../resume.mock";
 import { useEffect, useState } from "react";
 import type { personalInfoType } from "../../types/personalInfo.type";
-import {useResume} from '../../context/ResumeContext'
+import { useResume } from "../../context/ResumeContext";
 import PlusIcon from "../Icons/PlusIcon";
 
 type Project = {
@@ -24,42 +24,37 @@ export type Experience = {
 };
 
 function ResumeBuilder() {
-
   // const [resume, setResume] = useState(resumeMock);
 
-  const {resume, loading, saveResume} = useResume()
-   const [newSectionTitle, setNewSectionTitle] = useState('');
-   const [showNewSectionInput, setShowNewSectionInput] = useState(false);
-
-
+  const { resume, loading, saveResume } = useResume();
+  const [newSectionTitle, setNewSectionTitle] = useState("");
+  const [showNewSectionInput, setShowNewSectionInput] = useState(false);
 
   if (loading || !resume) {
     return <div>Loading...</div>;
   }
 
   function addNewSection() {
-  if (showNewSectionInput) {
-    const title = newSectionTitle.trim();
-    if (!title) {
-      alert('Please enter a section title');
-      return;
-    }
-    if (resume.sections[title]) {
-      alert('Section already exists');
-      return;
-    }
+    if (showNewSectionInput) {
+      const title = newSectionTitle.trim();
+      if (!title) {
+        alert("Please enter a section title");
+        return;
+      }
+      if (resume!.sections[title]) {
+        alert("Section already exists");
+        return;
+      }
 
-    const updatedSections = { ...resume.sections, [title]: [] };
-    saveResume({ sections: updatedSections });
+      const updatedSections = { ...resume!.sections, [title]: [] };
+      saveResume({ sections: updatedSections });
 
-    setNewSectionTitle('');
-    setShowNewSectionInput(false); 
-  } else {
-    
-    setShowNewSectionInput(true);
+      setNewSectionTitle("");
+      setShowNewSectionInput(false);
+    } else {
+      setShowNewSectionInput(true);
+    }
   }
-}
-  
 
   function handleSectionDelete(title: string) {
     // setResume((prev) => ({
@@ -69,43 +64,48 @@ function ResumeBuilder() {
     //   ),
     // }));
 
-
     const updatedSections = Object.fromEntries(
-      Object.entries(resume.sections).filter(([key]) => key !== title)
+      Object.entries(resume!.sections).filter(([key]) => key !== title)
     );
     const updatedResume = { ...resume, sections: updatedSections };
-    saveResume({ sections: updatedSections }); 
-  }
-
-  function handlePersonalInfoEdit(updatedInfo:personalInfoType) {
-  // setResume((prev) => ({
-  //   ...prev,
-  //   personalInfo: updatedInfo,
-  // }));
-
-  const updatedResume = { ...resume, personalInfo: updatedInfo };
-    saveResume({ personalInfo: updatedInfo });
-}
-
-
-  function handleSectionUpdate(title: string, items: any[]) {
-    const updatedSections = { ...resume.sections, [title]: items };
+    console.log("section deleted");
     saveResume({ sections: updatedSections });
   }
 
+  function handlePersonalInfoEdit(updatedInfo: personalInfoType) {
+    // setResume((prev) => ({
+    //   ...prev,
+    //   personalInfo: updatedInfo,
+    // }));
+
+    const updatedResume = { ...resume, personalInfo: updatedInfo };
+    saveResume({ personalInfo: updatedInfo });
+  }
+
+  function handleSectionUpdate(title: string, items: any[]) {
+    const updatedSections = { ...resume!.sections, [title]: items };
+    saveResume({ sections: updatedSections });
+  }
 
   return (
     <div className="min-h-screen flex justify-center py-10 bg-[#eaeaea] font-sans">
-      
       <div className="w-198.5 h-280.75 bg-[#edf2f5] shadow-[0_0_20px_rgba(0,0,0,0.15)] leading-relaxed ">
-        <IntroRow {...resume.personalInfo} />
+        {/* <IntroRow {...resume.personalInfo} /> */}
+
+        <IntroRow
+          personalInfo={resume.personalInfo}
+          onEdit={handlePersonalInfoEdit}
+        />
 
         {/* main row */}
 
         <div className="w-full h-[93%] pl-10">
           <div className="columns-2 gap-10 h-full [column-fill:_auto]">
             <div className="break-inside-avoid mb-6 ">
-              <PersonalDetails {...resume.personalInfo}  onEdit={handlePersonalInfoEdit}/>
+              <PersonalDetails
+                {...resume.personalInfo}
+                onEdit={handlePersonalInfoEdit}
+              />
             </div>
 
             {Object.entries(resume.sections).map(([key, value]) => {
@@ -124,31 +124,27 @@ function ResumeBuilder() {
           </div>
         </div>
       </div>
-      
 
       <div className="absolute bottom-4 right-4 flex items-center space-x-2">
-  {showNewSectionInput && (
-    <input
-      type="text"
-      value={newSectionTitle}
-      onChange={(e) => setNewSectionTitle(e.target.value)}
-      placeholder="Enter section title"
-      className="px-2 py-1 rounded border border-gray-400"
-    />
-  )}
-  <button
-    onClick={addNewSection}
-    className="flex items-center space-x-1 bg-blue-500 text-white px-4 py-2 rounded-lg"
-  >
-    <PlusIcon />
-    <span>{showNewSectionInput ? 'Save Section' : 'Add Section'}</span>
-  </button>
-</div>
-
+        {showNewSectionInput && (
+          <input
+            type="text"
+            value={newSectionTitle}
+            onChange={(e) => setNewSectionTitle(e.target.value)}
+            placeholder="Enter section title"
+            className="px-2 py-1 rounded border border-gray-400"
+          />
+        )}
+        <button
+          onClick={addNewSection}
+          className="flex items-center space-x-1 bg-blue-500 text-white px-4 py-2 rounded-lg"
+        >
+          <PlusIcon />
+          <span>{showNewSectionInput ? "Save Section" : "Add Section"}</span>
+        </button>
+      </div>
     </div>
   );
 }
 
 export default ResumeBuilder;
-
-
