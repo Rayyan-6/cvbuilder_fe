@@ -126,6 +126,7 @@ function ResumeBuilder() {
                     data={value}
                     onSectionDelete={handleSectionDelete}
                     onSectionUpdate={handleSectionUpdate}
+                    hasBar={true}
                   />
                 </div>
               );

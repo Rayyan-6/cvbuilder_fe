@@ -14,22 +14,21 @@ export type SubSection = {
   iconDesc?: string;
 };
 
-type GeneralComponentProps = {
+type EducationComponentProps = {
   title: string;
   data: SubSection[];
-  hasBar: boolean;
   onSectionDelete: (title: string) => void;
   onSectionUpdate?: (title: string, items: any[]) => void;
 };
 
-function GeneralComponent(props: GeneralComponentProps) {
+function EducationComponent(props: EducationComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSectionData, setActiveSectionData] = useState<
     SubSection[] | null
   >(null);
   const [items, setItems] = useState<SubSection[]>([]);
   const [editedItem, setEditedItem] = useState<SubSection | null>(null);
-  const [item, setItem] = useState([]);
+  const [item, setItem] = useState([])
 
   useEffect(() => {
     setItems(props.data);
@@ -60,7 +59,7 @@ function GeneralComponent(props: GeneralComponentProps) {
     setIsModalOpen(true);
   }
 
-  console.log(props.title, props.data, "modal opened----------");
+  console.log(props.title, props.data, 'modal opened----------')
 
   return (
     <div className="group relative hover:bg-gray-300 mr-7">
@@ -81,7 +80,7 @@ function GeneralComponent(props: GeneralComponentProps) {
           }}
           editedItem={editedItem}
         />
-      ) : null}
+         ) : null}
 
       {/* Header */}
       <div className="flex flex-col">
@@ -100,10 +99,12 @@ function GeneralComponent(props: GeneralComponentProps) {
                 // setActiveSectionData(props.data);
                 setActiveSectionData(null);
               }}
+
               className="px-2 text-sm flex cursor-pointer"
             >
               <PlusIcon /> <span>ADD</span>
             </button>
+
           </div>
         </div>
 
@@ -123,7 +124,6 @@ function GeneralComponent(props: GeneralComponentProps) {
               company={item.company}
               onDelete={handleItemDelete}
               onEdit={handleItemEdit}
-              hasBar={props.hasBar}
             />
           );
         })}
@@ -135,56 +135,45 @@ function GeneralComponent(props: GeneralComponentProps) {
 function InsideComponent(
   props: SubSection & { onDelete: (id: string) => void } & {
     onEdit: (id: string) => void;
-  } & { hasBar: boolean }
+  }
 ) {
   return (
-    <div className="pb-3 flex flex-row">
-      {props.hasBar && (
-        <div className="flex flex-col items-center mr-3">
-          {/* Black circle */}
-          <div className="w-2 h-2 bg-black rounded-full mb-1"></div>
-          {/* Vertical bar */}
-          <div className="w-0.5 flex-1 bg-gray-400"></div>
+    <div className="pb-3 ">
+      <div className="flex flex-row justify-between ">
+        {!props.icon && (
+          <div className="font-bold text-xs ">{props.heading}</div>
+        )}
+
+        {/* hover container */}
+        <div className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
+          {/* edit button */}
+          <button
+            className="cursor-pointer"
+            onClick={() => props.onEdit(props.id)}
+          >
+            <EditIcon />
+          </button>
+
+          {/* delete dustbin */}
+          <button
+            className="cursor-pointer"
+            onClick={() => props.onDelete(props.id)}
+          >
+            <TrashIcon />
+          </button>
+        </div>
+      </div>
+
+      {props.icon && (
+        <div className="flex flex-row">
+          <div className="">{props.icon}</div>
+          <div className="ml-3">{props.iconDesc}</div>
         </div>
       )}
 
-      <div className="flex-1">
-        <div className="flex flex-row justify-between ">
-          {!props.icon && (
-            <div className="font-bold text-xs ">{props.heading}</div>
-          )}
-
-          <div className="opacity-0 hover:opacity-100 w-12 h-5 bg-white text-black flex flex-row justify-between">
-            <button
-              className="cursor-pointer"
-              onClick={() => props.onEdit(props.id)}
-            >
-              <EditIcon />
-            </button>
-            <button
-              className="cursor-pointer"
-              onClick={() => props.onDelete(props.id)}
-            >
-              <TrashIcon />
-            </button>
-          </div>
-        </div>
-
-        {props.icon && (
-          <div className="flex flex-row">
-            <div className="">{props.icon}</div>
-            <div className="ml-3">{props.iconDesc}</div>
-          </div>
-        )}
-
-        {props.designation && (
-          <div className="text-xs ">{props.designation}</div>
-        )}
-        {props.company && <div className="text-xs">{props.company}</div>}
-        {props.description && (
-          <div className="text-xs ">{props.description}</div>
-        )}
-      </div>
+      {props.designation && <div className="text-xs ">{props.designation}</div>}
+      {props.company && <div className="text-xs">{props.company}</div>}
+      {props.description && <div className="text-xs ">{props.description}</div>}
     </div>
   );
 }
