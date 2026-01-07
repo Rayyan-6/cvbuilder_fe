@@ -5,13 +5,10 @@ import type { ResumeType } from "../types/resume.types";
 type ResumeContextType = {
   resume: ResumeType | null;
   loading: boolean;
-  // saveResume: (updates: any) => Promise<void>;
   saveResume: (updates: Partial<ResumeType>) => Promise<void>;
 };
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
-
-
 
 export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   const [resume, setResume] = useState<ResumeType | null>(null);
@@ -39,23 +36,6 @@ export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(false);
     });
 }, []);
-
-  // const saveResume = async (updates: Partial<ResumeType>) => {
-  //   if (!resume) return;
-
-  //   const mergedResume: ResumeType = {
-  //     ...resume,
-  //     ...updates,
-  //   };
-
-  //   const updatedFromServer = await resumeApi.updateResume(mergedResume);
-
-  //   setResume((prev) => ({
-  //     ...prev!,
-  //     ...updatedFromServer,
-  //   }));
-  // };
-
 
     const saveResume = async (updates: Partial<ResumeType>) => {
     if (!resume) return;
@@ -90,3 +70,4 @@ export const useResume = () => {
   if (!context) throw new Error("useResume must be used within ResumeProvider");
   return context;
 };
+

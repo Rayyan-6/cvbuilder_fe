@@ -138,7 +138,7 @@ function InsideComponent(
   } & { hasBar: boolean }
 ) {
   return (
-    <div className="pb-3 flex flex-row">
+    <div className="pb-3 flex flex-row ">
       {props.hasBar && (
         <div className="flex flex-col items-center mr-3">
           {/* Black circle */}

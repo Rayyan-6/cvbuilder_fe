@@ -15,8 +15,8 @@ const FIELDS: (keyof SubSection)[] = [
   "description",
   "designation",
   "company",
-  "icon",
-  "iconDesc",
+  // "icon",
+  // "iconDesc",
 ];
 
 function StaticSubSectionModal({ isOpen, onClose, onAdd, onEdit, editedItem }: ModalProps) {

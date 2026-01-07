@@ -24,7 +24,7 @@ export type Experience = {
 };
 
 const defaultItem = {
-  id: crypto.randomUUID(), 
+  id: crypto.randomUUID(),
   heading: "New Item",
   description: "",
   designation: "",
@@ -37,6 +37,10 @@ function ResumeBuilder() {
   const { resume, loading, saveResume } = useResume();
   const [newSectionTitle, setNewSectionTitle] = useState("");
   const [showNewSectionInput, setShowNewSectionInput] = useState(false);
+  const [hasBarChecked, setHasBarChecked] = useState(true);
+  const [sectionHasBarMap, setSectionHasBarMap] = useState<
+    Record<string, boolean>
+  >({});
 
   if (loading || !resume) {
     return <div>Loading...</div>;
@@ -58,7 +62,10 @@ function ResumeBuilder() {
       const updatedSections = { ...resume!.sections, [title]: [defaultItem] };
       saveResume({ sections: updatedSections });
 
+      setSectionHasBarMap((prev) => ({ ...prev, [title]: hasBarChecked }));
+
       setNewSectionTitle("");
+      setHasBarChecked(true);
       setShowNewSectionInput(false);
     } else {
       setShowNewSectionInput(true);
@@ -126,7 +133,7 @@ function ResumeBuilder() {
                     data={value}
                     onSectionDelete={handleSectionDelete}
                     onSectionUpdate={handleSectionUpdate}
-                    hasBar={true}
+                    hasBar={hasBarChecked}
                   />
                 </div>
               );
@@ -135,16 +142,28 @@ function ResumeBuilder() {
         </div>
       </div>
 
-      <div className="absolute bottom-4 right-4 flex items-center space-x-2">
+      <div className="fixed bottom-4 right-4 flex items-center space-x-2">
         {showNewSectionInput && (
-          <input
-            type="text"
-            value={newSectionTitle}
-            onChange={(e) => setNewSectionTitle(e.target.value)}
-            placeholder="Enter section title"
-            className="px-2 py-1 rounded border border-gray-400"
-          />
+          <div className="flex flex-col justify-center items-center space-x-2">
+            <input
+              type="text"
+              value={newSectionTitle}
+              onChange={(e) => setNewSectionTitle(e.target.value)}
+              placeholder="Enter section title"
+              className="px-2 py-1 rounded border border-gray-400"
+            />
+            <label className="flex items-center space-x-1">
+              <input
+                type="checkbox"
+                checked={hasBarChecked}
+                onChange={(e) => setHasBarChecked(e.target.checked)}
+                className="bg-blue-500"
+              />
+              <span className="text-sm">Show Bar</span>
+            </label>
+          </div>
         )}
+
         <button
           onClick={addNewSection}
           className="flex items-center space-x-1 bg-blue-500 text-white px-4 py-2 rounded-lg"
