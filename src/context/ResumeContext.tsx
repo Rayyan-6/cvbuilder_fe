@@ -1,35 +1,57 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { resumeApi } from '../api/resumeApi';
-import type { ResumeType } from '../types/resume.types';
+import { createContext, useContext, useState, useEffect } from "react";
+import { resumeApi } from "../api/resumeApi";
+import type { ResumeType } from "../types/resume.types";
 
 type ResumeContextType = {
-  resume: ResumeType; 
+  resume: ResumeType | null;
   loading: boolean;
-  saveResume: (updates: any) => Promise<void>;
+  saveResume: (updates: Partial<ResumeType>) => Promise<void>;
 };
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 
 export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [resume, setResume] = useState<any>(null);
+  const [resume, setResume] = useState<ResumeType | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    resumeApi.getResume()
-      .then(data => {
-        setResume(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to load resume', err);
-        setLoading(false);
-      });
-  }, []);
+  const isEmptySections = (sections: Record<string, any[]>) =>
+  Object.values(sections).every(
+    (items) => Array.isArray(items) && items.length === 0
+  );
 
-  const saveResume = async (updates: any) => {
+
+  useEffect(() => {
+  resumeApi.getResume()
+    .then((data) => {
+      const normalizedResume = {
+        ...data,
+        sections: isEmptySections(data.sections) ? {} : data.sections,
+      };
+
+      setResume(normalizedResume);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Failed to load resume", err);
+      setLoading(false);
+    });
+}, []);
+
+    const saveResume = async (updates: Partial<ResumeType>) => {
+    if (!resume) return;
+
+    const mergedResume: ResumeType = {
+      ...resume,
+      ...updates,
+    };
+
     try {
-      const updatedResume = await resumeApi.updateResume(updates);
-      setResume(updatedResume);
+      const updatedFromServer = await resumeApi.updateResume(mergedResume);
+
+      setResume((prev) => ({
+        ...prev!,
+        ...updatedFromServer,
+      }));
     } catch (err) {
       alert('Save failed. Please try again.');
       console.error(err);
@@ -45,6 +67,7 @@ export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useResume = () => {
   const context = useContext(ResumeContext);
-  if (!context) throw new Error('useResume must be used within ResumeProvider');
+  if (!context) throw new Error("useResume must be used within ResumeProvider");
   return context;
 };
+

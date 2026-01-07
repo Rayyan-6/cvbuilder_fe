@@ -1,29 +1,32 @@
 import { useEffect, useState } from "react";
+import type { personalInfoType } from "../../types/personalInfo.type";
 
 type IntroRowModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  name: string;
-  position: string;
-  onSave: (updated: { name: string; position: string }) => void;
+  personalInfo: personalInfoType;
+  onSave: (updated: personalInfoType) => void;
 };
 
 function IntroRowModal(props: IntroRowModalProps) {
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<personalInfoType>({
+    id: "",
     name: "",
     position: "",
+    email: "",
+    phone: "",
+    address: "",
+    driving_license: false,
+    dob: "",
   });
 
   useEffect(() => {
-    if (props.isOpen) {
-      setFormValues({
-        name: props.name || "",
-        position: props.position || "",
-      });
+    if (props.isOpen && props.personalInfo) {
+      setFormValues({ ...props.personalInfo });
     }
-  }, [props.isOpen, props.name, props.position]);
+  }, [props.isOpen, props.personalInfo]);
 
-  const handleChange = (field: "name" | "position", value: string) => {
+  const handleChange = (field: keyof personalInfoType, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -33,11 +36,8 @@ function IntroRowModal(props: IntroRowModalProps) {
       return;
     }
 
-    props.onSave({
-      name: formValues.name.trim(),
-      position: formValues.position.trim(),
-    });
-
+    // props.onSave({ ...formValues });
+    props.onSave({ ...formValues, name: formValues.name.trim(), position: formValues.position.trim() });
     props.onClose();
   };
 
