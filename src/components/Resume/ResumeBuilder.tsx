@@ -23,6 +23,14 @@ export type Experience = {
   projects: Project[];
 };
 
+const defaultItem = {
+  id: crypto.randomUUID(), 
+  heading: "New Item",
+  description: "",
+  designation: "",
+  company: "",
+};
+
 function ResumeBuilder() {
   // const [resume, setResume] = useState(resumeMock);
 
@@ -46,7 +54,8 @@ function ResumeBuilder() {
         return;
       }
 
-      const updatedSections = { ...resume!.sections, [title]: [] };
+      // const updatedSections = { ...resume!.sections, [title]: [] };
+      const updatedSections = { ...resume!.sections, [title]: [defaultItem] };
       saveResume({ sections: updatedSections });
 
       setNewSectionTitle("");
@@ -67,8 +76,8 @@ function ResumeBuilder() {
     const updatedSections = Object.fromEntries(
       Object.entries(resume!.sections).filter(([key]) => key !== title)
     );
-    const updatedResume = { ...resume, sections: updatedSections };
-    console.log("section deleted");
+    // const updatedResume = { ...resume, sections: updatedSections };
+    // console.log("section deleted");
     saveResume({ sections: updatedSections });
   }
 

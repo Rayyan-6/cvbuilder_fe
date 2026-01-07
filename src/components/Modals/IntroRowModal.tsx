@@ -26,7 +26,7 @@ function IntroRowModal(props: IntroRowModalProps) {
     }
   }, [props.isOpen, props.personalInfo]);
 
-  const handleChange = (field: keyof personalInfoType, value: any) => {
+  const handleChange = (field: keyof personalInfoType, value: string | boolean) => {
     setFormValues((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -36,7 +36,8 @@ function IntroRowModal(props: IntroRowModalProps) {
       return;
     }
 
-    props.onSave({ ...formValues });
+    // props.onSave({ ...formValues });
+    props.onSave({ ...formValues, name: formValues.name.trim(), position: formValues.position.trim() });
     props.onClose();
   };
 

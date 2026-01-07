@@ -5,7 +5,8 @@ import type { ResumeType } from "../types/resume.types";
 type ResumeContextType = {
   resume: ResumeType | null;
   loading: boolean;
-  saveResume: (updates: any) => Promise<void>;
+  // saveResume: (updates: any) => Promise<void>;
+  saveResume: (updates: Partial<ResumeType>) => Promise<void>;
 };
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
@@ -39,7 +40,24 @@ export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
     });
 }, []);
 
-  const saveResume = async (updates: Partial<ResumeType>) => {
+  // const saveResume = async (updates: Partial<ResumeType>) => {
+  //   if (!resume) return;
+
+  //   const mergedResume: ResumeType = {
+  //     ...resume,
+  //     ...updates,
+  //   };
+
+  //   const updatedFromServer = await resumeApi.updateResume(mergedResume);
+
+  //   setResume((prev) => ({
+  //     ...prev!,
+  //     ...updatedFromServer,
+  //   }));
+  // };
+
+
+    const saveResume = async (updates: Partial<ResumeType>) => {
     if (!resume) return;
 
     const mergedResume: ResumeType = {
@@ -47,12 +65,17 @@ export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
       ...updates,
     };
 
-    const updatedFromServer = await resumeApi.updateResume(mergedResume);
+    try {
+      const updatedFromServer = await resumeApi.updateResume(mergedResume);
 
-    setResume((prev) => ({
-      ...prev!,
-      ...updatedFromServer,
-    }));
+      setResume((prev) => ({
+        ...prev!,
+        ...updatedFromServer,
+      }));
+    } catch (err) {
+      alert('Save failed. Please try again.');
+      console.error(err);
+    }
   };
 
   return (

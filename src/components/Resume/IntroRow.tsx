@@ -51,7 +51,7 @@ function IntroRow(props: IntroRowProps) {
         // position={props.position}
         personalInfo={props.personalInfo}
         onClose={() => setIsModalOpen(false)}
-        onSave={(updated: any) => {
+        onSave={(updated: personalInfoType) => {
           props.onEdit?.(updated);
           setIsModalOpen(false);
         }}
